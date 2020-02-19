@@ -1,0 +1,48 @@
+# Voxgraph mapper params
+planner:
+  planner_node:
+    verbose: false
+    submap_creation_interval: 20
+    pointcloud_topic: "/unreal/unreal_sensor_model/ue_sensor_out"
+    subscriber_queue_length: 1
+    mission_frame: "world"
+    odom_frame: "world"
+    base_link_frame: "camera"
+    odom_frame_corrected: "odom_corrected"
+    base_link_frame_corrected: "robot_corrected"
+    sensor_frame_corrected: "sensor_corrected"
+    tsdf_integrator:
+      tsdf_voxel_size: 0.20
+      truncation_distance: 1.0
+      max_ray_length_m: 5.0
+      use_const_weight: true
+      use_weight_dropoff: true
+      use_sparsity_compensation_factor: true
+      sparsity_compensation_factor: 10.0
+      integration_order_mode: "sorted"
+    measurements:
+      submap_registration:
+          enabled: true
+          sampling_ratio: 0.05
+          registration_method: "explicit_to_implicit"
+          information_matrix:
+              x_x:     1.0
+              y_y:     1.0
+              z_z:     1.0
+              yaw_yaw: 1.0
+      odometry:
+          enabled: true
+          information_matrix:
+              x_x:     10.0
+              y_y:     10.0
+              z_z:     2500.0
+              yaw_yaw: 2500.0
+      height:
+          enabled: false
+          information_zz: 2500.0
+      loop_closure:
+          information_matrix:
+              x_x:     1.0
+              y_y:     1.0
+              z_z:     0.1
+              yaw_yaw: 0.0001

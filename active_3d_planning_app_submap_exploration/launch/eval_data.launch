@@ -1,0 +1,31 @@
+<launch>  
+  <!-- Data source Data, -->
+  <arg name="target_directory" default="/home/davide/data/experiment_evaluation" />
+  <arg name="experiment_config" default="Maze.yaml"/>
+
+  <!-- Actions -->
+  <arg name="evaluate" default="true"/>
+  <arg name="create_plots" default="true"/>
+  <arg name="show_plots" default="true"/>
+  <arg name="clear_voxblox_maps" default="false"/>	<!-- irreversible map removal (disk space)!-->
+
+  <!-- Load map params -->
+  <rosparam command="load" file="$(find active_3d_planning_app_reconstruction)/cfg/experiments/$(arg experiment_config)"/> 
+
+  <!-- Performance evaluator -->
+  <node name="voxgraph_node_evaluator" pkg="active_3d_planning_app_submap_exploration" type="voxgraph_node_evaluator" output="screen" >
+    <param name="target_directory" value="$(arg target_directory)" />
+	<param name="evaluate" value="$(arg evaluate)" />
+	<rosparam command="load" file="$(find active_3d_planning_app_reconstruction)/cfg/experiments/$(arg experiment_config)"/>
+  </node>
+
+  <!-- plotting is the main node, voxblox encapsulates c++ voxblox code -->
+  <node name="eval_plotting_node" pkg="active_3d_planning_app_submap_exploration" type="plot_data_node.py" output="screen" required="true">
+    <param name="target_directory" value="$(arg target_directory)" />
+    <param name="ns_eval_voxgraph_node" value="/voxgraph_node_evaluator" />
+    <param name="evaluate" value="$(arg evaluate)" />
+    <param name="create_plots" value="$(arg create_plots)" />
+    <param name="show_plots" value="$(arg show_plots)" />
+    <param name="clear_voxblox_maps" value="$(arg clear_voxblox_maps)" />
+  </node>
+</launch>
