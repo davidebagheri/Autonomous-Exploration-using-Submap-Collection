@@ -2,18 +2,19 @@
 planner:
   planner_node:
     verbose: false
-    submap_creation_interval: 20
+    submap_creation_interval: 30
     pointcloud_topic: "/unreal/unreal_sensor_model/ue_sensor_out"
     subscriber_queue_length: 1
     mission_frame: "world"
     odom_frame: "world"
-    base_link_frame: "camera"
+    base_link_frame: "firefly/drifted_base_link"
     odom_frame_corrected: "odom_corrected"
     base_link_frame_corrected: "robot_corrected"
     sensor_frame_corrected: "sensor_corrected"
+    use_tf_transforms: true
     tsdf_integrator:
       tsdf_voxel_size: 0.20
-      truncation_distance: 1.0
+      truncation_distance: 0.6
       max_ray_length_m: 5.0
       use_const_weight: true
       use_weight_dropoff: true
@@ -46,3 +47,9 @@ planner:
               y_y:     1.0
               z_z:     0.1
               yaw_yaw: 0.0001
+    T_base_link_sensor:
+        - [0.0,  0.0, 1.0,  0.0]
+        - [-1.0,  0.0,  0.0, 0.0]
+        - [0.0,  -1.0, 0.0,  0.0]
+        - [0.0,  0.0, 0.0,  1.0]
+

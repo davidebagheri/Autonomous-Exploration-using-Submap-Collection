@@ -1,12 +1,13 @@
 <launch>  
   <!-- Data source Data, -->
-  <arg name="target_directory" default="/home/davide/data/experiment_evaluation" />
+  <arg name="target_directory" default="/media/davide/DATA/data/submap_exploration_planner/WithDrift/ConnectivityTraversableCheck" />
   <arg name="experiment_config" default="Maze.yaml"/>
+  <arg name="plot_global_traj_executed" default="false"/>
 
   <!-- Actions -->
-  <arg name="evaluate" default="true"/>
+  <arg name="evaluate" default="false"/>
   <arg name="create_plots" default="true"/>
-  <arg name="show_plots" default="true"/>
+  <arg name="show_plots" default="false"/>
   <arg name="clear_voxblox_maps" default="false"/>	<!-- irreversible map removal (disk space)!-->
 
   <!-- Load map params -->
@@ -25,6 +26,7 @@
     <param name="ns_eval_voxgraph_node" value="/voxgraph_node_evaluator" />
     <param name="evaluate" value="$(arg evaluate)" />
     <param name="create_plots" value="$(arg create_plots)" />
+    <param name="plot_global_traj_executed" value="$(arg plot_global_traj_executed)" />
     <param name="show_plots" value="$(arg show_plots)" />
     <param name="clear_voxblox_maps" value="$(arg clear_voxblox_maps)" />
   </node>

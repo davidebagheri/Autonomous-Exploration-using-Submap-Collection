@@ -14,11 +14,24 @@ namespace active_3d_planning {
             ros::NodeHandle nh("");
             ros::NodeHandle nh_private("~");
 
+            // Get params
+            setParam<bool>(param_map, "tsdf_needed", &tsdf_needed_, true);
+            setParam<double>(param_map, "search_distance", &search_distance_, 3.0);
+            setParam<double>(param_map, "search_step", &search_step_, 0.5);
+
             // Set istances of Voxgraph, the Planner Map Manager and the Frontiers Evaluator
             voxgraph_mapper_.reset(new voxgraph::VoxgraphMapper(nh, nh_private));
             planner_map_manager_.reset(new PlannerMapManager(
                     &voxgraph_mapper_->getSubmapCollection(),
+                    &voxgraph_mapper_->getRegistrationConstraint(),
+                    tsdf_needed_,
                     voxgraph_mapper_->getSubmapConfig()));
+
+            std::string temp_args;
+            std::string ns = (*param_map)["param_namespace"];
+            setParam<std::string>(param_map, "bounding_volume_args", &temp_args,"/map_bounding_volume");
+            //bounding_box_ = planner_.getFactory().createModule<BoundingVolume>(temp_args, planner_, verbose_modules_);
+
 
             // Ros publishers
             pointcloud_tsdf_active_submap_pub_ = nh_private.advertise<pcl::PointCloud<pcl::PointXYZRGBA>>(
@@ -30,16 +43,27 @@ namespace active_3d_planning {
             pointcloud_esdf_current_neighbours_pub_ = nh_private.advertise<pcl::PointCloud<pcl::PointXYZRGBA>>(
                     "pointcloud_esdf_current_neighbours", 1, true);
 
+            global_candidates_pub_ = nh_private.advertise<visualization_msgs::MarkerArray>(
+                    "global_candidates", 1, true);
+
             // cache constants
             c_voxel_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size;
             c_block_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size *
                             voxgraph_mapper_->getSubmapConfig().esdf_voxels_per_side;
             c_maximum_weight_ = voxblox::getTsdfIntegratorConfigFromRosParam(
                     nh_private).max_weight;    // direct access is not exposed
+
+            c_neighbor_robot_[0] = Eigen::Vector3d(planner_.getSystemConstraints().collision_radius, 0, 0);
+            c_neighbor_robot_[1] = Eigen::Vector3d(-planner_.getSystemConstraints().collision_radius, 0, 0);
+            c_neighbor_robot_[2] = Eigen::Vector3d(0, planner_.getSystemConstraints().collision_radius, 0);
+            c_neighbor_robot_[3] = Eigen::Vector3d(0, -planner_.getSystemConstraints().collision_radius, 0);
+            c_neighbor_robot_[4] = Eigen::Vector3d(0, 0, planner_.getSystemConstraints().collision_radius);
+            c_neighbor_robot_[5] = Eigen::Vector3d(0, 0, -planner_.getSystemConstraints().collision_radius);
         }
 
         bool VoxgraphMap::isTraversable(const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation) {
             double distance = 0.0;
+
             if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()->getDistanceAtPosition(position, &distance)) {
                 // This means the voxel is observed
                 return (distance > planner_.getSystemConstraints().collision_radius);
@@ -173,32 +197,160 @@ namespace active_3d_planning {
             return 0.0;
         }
 
+        // Collision check considering all the submaps
+        bool VoxgraphMap::isTraversableInAllSubmaps(const Eigen::Vector3d &point){
+            double distance = 0.0;
+            voxblox::Point point_M(point.x(), point.y(), point.z());
 
-        void VoxgraphMap::updatePlanningMaps(){
-            if (voxgraph_mapper_->getSubmapCollection().empty()) return;
+            for (auto submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()){
+                voxblox::Point point_S = voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getInversePose() * point_M;
+                Eigen::Vector3d point_S_d(point_S.x(), point_S.y(), point_S.z());
 
-            // Update planner maps
-            planner_map_manager_->updateActiveSubmap();
-            planner_map_manager_->updateCurrentNeighbours(
-                    voxgraph_mapper_->getSubmapCollection().getActiveSubmapID());
-
-            // Planner maps visualization
-            publishActiveSubmap();
-            publishCurrentNeighbours();
+                if (voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id)
+                .getEsdfMap().getDistanceAtPosition(point_S_d, &distance)){
+                    if (distance < planner_.getSystemConstraints().collision_radius) return false;
+                }
+            }
+            return (distance > planner_.getSystemConstraints().collision_radius);
         }
 
-        bool VoxgraphMap::hasActiveMapFinished(){
-            static SubmapID active_submap_id = 0;
+        bool VoxgraphMap::isObservedInAllSubmaps(const Eigen::Vector3d &point){
+            voxblox::Point point_M(point.x(), point.y(), point.z());
 
-            if (!voxgraph_mapper_->getSubmapCollection().empty()) {
-                if (voxgraph_mapper_->getSubmapCollection().getActiveSubmapID() != active_submap_id){
-                    active_submap_id = voxgraph_mapper_->getSubmapCollection().getActiveSubmapID();
+            for (auto submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()) {
+                voxblox::Point point_S = voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getInversePose() * point_M;
+                Eigen::Vector3d point_S_d(point_S.x(), point_S.y(), point_S.z());
+                if (voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getEsdfMap().isObserved(point_S_d)){
                     return true;
                 }
             }
             return false;
         }
 
+        bool VoxgraphMap::isInsideAllSubmaps(const Eigen::Vector3d &point){
+            for (int i = 0; i < 6; i++){
+                if (!isObservedInAllSubmaps(point + c_neighbor_robot_[i])) return false;
+            }
+            return true;;
+        }
+
+        bool VoxgraphMap::isInsideActiveSubmap(const Eigen::Vector3d &point){
+            for (int i = 0; i < 6; i++){
+                //if (!isObserved(point + c_neighbor_robot_[i])) return false;
+                double distance = 0;
+                if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()
+                ->getDistanceAtPosition(point + c_neighbor_robot_[i], &distance)) {
+                    // This means the voxel is observed
+                    if (distance > 0) continue;
+                }
+                return false;
+            }
+            return true;;
+        }
+
+        void VoxgraphMap::getFreeNeighbouringPoints(const Eigen::Vector3d &point, std::vector<Eigen::Vector3d>* free_points){
+            visualization_msgs::Marker marker;
+            visualization_msgs::MarkerArray marker_array;
+            marker.header.frame_id = "world";
+            marker.type = visualization_msgs::Marker::SPHERE;
+            marker.action = visualization_msgs::Marker::ADD;
+            marker.scale.x = 0.2;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.color.a = 1;
+            marker.id = 0;
+
+            free_points->clear();
+            Eigen::Vector3d candidate_point(point.x() - search_distance_/2,
+                    point.y() - search_distance_/2,
+                    point.z() - search_distance_/2);
+
+            double x_max = point.x() + search_distance_/2;
+            double y_max = point.y() + search_distance_/2;
+            double z_max = point.z() + search_distance_/2;
+
+            while (candidate_point.x() <= x_max){
+                while (candidate_point.y() <= y_max){
+                    while (candidate_point.z() <= z_max){
+
+                        if (isTraversableInAllSubmaps(candidate_point) && isInsideAllSubmaps(candidate_point)){
+                            if (candidate_point.z() < 1)
+                                free_points->emplace_back(candidate_point);
+                            marker.color.r = 1;
+                            marker.color.g = 0;
+                            marker.color.b = 0;
+                            marker.pose.position.x = candidate_point.x();
+                            marker.pose.position.y = candidate_point.y();
+                            marker.pose.position.z = candidate_point.z();
+                            marker.id++;
+                            marker_array.markers.emplace_back(marker);
+                        } else {
+                            marker.color.r = 0;
+                            marker.color.g = 0;
+                            marker.color.b = 1;
+                            marker.id++;
+                            marker.pose.position.x = candidate_point.x();
+                            marker.pose.position.y = candidate_point.y();
+                            marker.pose.position.z = candidate_point.z();
+                            marker_array.markers.emplace_back(marker);
+                        }
+                        candidate_point.z() += search_step_;
+                    }
+                    candidate_point.z() = point.z() - search_distance_/2;
+                    candidate_point.y() += search_step_;
+                }
+                candidate_point.y() = point.y() - search_distance_/2;
+                candidate_point.x() += search_step_;
+            }
+
+            marker.color.r = 0;
+            marker.color.g = 1;
+            marker.color.b = 0;
+            marker.pose.position.x = point.x();
+            marker.pose.position.y = point.y();
+            marker.pose.position.z = point.z();
+            marker_array.markers.emplace_back(marker);
+            marker.id++;
+            global_candidates_pub_.publish(marker_array);
+        }
+
+        // Update the Active submap and the Current neighbours map used for planning
+        void VoxgraphMap::updatePlanningMaps(){
+            if (voxgraph_mapper_->getSubmapCollection().empty()) return;
+
+            // Update planner maps
+            planner_map_manager_->updateActiveSubmap();
+
+            //ros::Time beg = ros::Time::now();
+            planner_map_manager_->updateCurrentNeighbours(
+                    voxgraph_mapper_->getSubmapCollection().getActiveSubmapID());
+            /*ros::Time end = ros::Time::now();
+
+            std::ofstream fout;
+            fout.open("/home/davide/Desktop/map_time.txt", std::ios::app );
+            if (!fout.is_open()) std::cout << "not open";
+
+            fout << time_transform + (end - beg).toNSec() / 1000000 << ", ";*/
+
+            // Planner maps visualization
+            publishActiveSubmap();
+            publishCurrentNeighbours();
+        }
+
+        bool VoxgraphMap::hasActiveMapFinished(bool update){
+            static SubmapID active_submap_id = 0;
+            if (!voxgraph_mapper_->getSubmapCollection().empty()) {
+                if (voxgraph_mapper_->getSubmapCollection().getActiveSubmapID() != active_submap_id){
+                    if (update) {
+                        active_submap_id = voxgraph_mapper_->getSubmapCollection().getActiveSubmapID();
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Visualization
         void VoxgraphMap::publishActiveSubmap(){
             if (pointcloud_tsdf_active_submap_pub_.getNumSubscribers() > 0){
                 pcl::PointCloud<pcl::PointXYZI> tsdf_pointcloud;

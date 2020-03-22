@@ -15,14 +15,14 @@ visualize_gain: true
 highlight_executed_trajectory: true
 
 map:
-  type: "VoxgraphMap"
+  type: "SafeVoxgraphMap"
 
 system_constraints:
   v_max: 1.0
   a_max: 1.0
   yaw_rate_max: 1.6
   yaw_accel_max: 1.6
-  collision_radius: 0.7
+  collision_radius: 1.0
 
 trajectory_generator:
   collision_optimistic: false
@@ -98,7 +98,7 @@ trajectory_evaluator:
         type: "SubsequentBest"
 
 back_tracker:
-  type: "RotateInPlace"
+  type: "RotateReverse"
   turn_rate: 1.6
   update_rate: 0.5
   sampling_rate: 20.0

@@ -2,6 +2,8 @@
 #include "active_3d_planning_app_submap_exploration/planner/voxgraph_local_planner.h"
 
 #include "active_3d_planning_voxgraph/initialization/voxgraph_package.h"
+#include "active_3d_planning_safe_voxgraph/initialization/safe_voxgraph_package.h"
+
 #include "active_3d_planning_mav/initialization/mav_package.h"
 
 #include <glog/logging.h>
@@ -19,6 +21,7 @@ int main(int argc, char **argv) {
     // prevent the linker from optimizing these packages away...
     active_3d_planning::initialize::voxgraph_package();
     active_3d_planning::initialize::mav_package();
+    active_3d_planning::initialize::safe_voxgraph_package();
 
     // Set logging to debug for testing
     ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);

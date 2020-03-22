@@ -1,0 +1,8 @@
+prefix=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel
+
+Name: active_3d_planning_app_submap_exploration
+Description: Description of active_3d_planning_app_submap_exploration
+Version: 0.0.0
+Cflags: -I/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/include
+Libs: -L${prefix}/lib -lactive_3d_planning_app_submap_exploration
+Requires: active_3d_planning_core active_3d_planning_ros active_3d_planning_mav active_3d_planning_voxgraph active_3d_planning_safe_voxgraph active_3d_planning_naive_voxgraph roscpp rospy voxblox_ros voxblox trajectory_msgs mav_msgs std_msgs sensor_msgs geometry_msgs nav_msgs cblox_planning

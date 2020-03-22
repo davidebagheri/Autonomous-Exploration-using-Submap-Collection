@@ -14,10 +14,22 @@ namespace active_3d_planning {
 
             virtual ~VoxgraphLocalPlanner() = default;
 
-            bool requestNextTrajectory() override;
+            virtual bool requestNextTrajectory() override;
 
         protected:
             map::VoxgraphMap* voxgraph_map_ptr_;
+
+
+
+
+            /// Test
+            //void loopIteration() override;
+            double getNumSamples();
+            /*double time = 0;
+            int n = 0;
+            int counter = 0;
+            double n_samples_average = 0;
+            bool flag = true;*/
         };
     }
 }

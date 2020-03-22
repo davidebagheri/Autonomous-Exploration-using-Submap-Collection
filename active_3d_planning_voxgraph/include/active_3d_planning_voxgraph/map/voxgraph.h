@@ -7,6 +7,7 @@
 #include "active_3d_planning_voxgraph/planner_map_manager/planner_map_manager.h"
 #include "voxgraph/frontend/voxgraph_mapper.h"
 #include "geometry_msgs/PoseStamped.h"
+#include "active_3d_planning_core/data/bounding_volume.h"
 #include <memory>
 
 namespace active_3d_planning {
@@ -61,15 +62,28 @@ namespace active_3d_planning {
             // get the stored weight
             double getCurrentNeighboursVoxelWeight(const Eigen::Vector3d &point);
 
+            // check collision in all the submaps
+            bool isTraversableInAllSubmaps(const Eigen::Vector3d &point);
+
+            // check observability in all the submaps
+            bool isObservedInAllSubmaps(const Eigen::Vector3d &point);
+
+            // check whether the points in the 6-connectivity are observed in the submaps
+            bool isInsideAllSubmaps(const Eigen::Vector3d &point);
+
+            // check whether the points in the 6-connectivity are observed in the active submap
+            bool isInsideActiveSubmap(const Eigen::Vector3d &point);
+
+            // get Free points in a square centered in the given point
+            void getFreeNeighbouringPoints(const Eigen::Vector3d &point, std::vector<Eigen::Vector3d>* free_points);
+
             void updatePlanningMaps();
 
-            bool hasActiveMapFinished();
+            bool hasActiveMapFinished(bool update = true);
 
             void publishActiveSubmap();
 
             void publishCurrentNeighbours();
-
-            void publishFrontiers();
 
             voxgraph::VoxgraphSubmapCollection &getSubmapCollection() {
                 return voxgraph_mapper_->getSubmapCollection();
@@ -96,6 +110,7 @@ namespace active_3d_planning {
 
             std::unique_ptr<voxgraph::VoxgraphMapper> voxgraph_mapper_;
             std::unique_ptr<PlannerMapManager> planner_map_manager_;
+            std::unique_ptr<BoundingVolume> bounding_box_;
 
             // Publishers
             ::ros::Publisher pointcloud_tsdf_active_submap_pub_;
@@ -103,10 +118,16 @@ namespace active_3d_planning {
             ::ros::Publisher pointcloud_tsdf_current_neighbours_pub_;
             ::ros::Publisher pointcloud_esdf_current_neighbours_pub_;
 
+            ::ros::Publisher global_candidates_pub_;
+
             // cache constants
             double c_voxel_size_;
             double c_block_size_;
             double c_maximum_weight_;
+            double search_distance_;
+            double search_step_;
+            Eigen::Vector3d c_neighbor_robot_[6];
+            bool tsdf_needed_;
         };
 
     } // namespace map

@@ -2,7 +2,7 @@
 replan_pos_threshold: 0.15
 replan_yaw_threshold: 0.15
 
-max_new_segments: 100
+max_new_segments: 50
 min_new_segments: 0
 max_new_tries: 0
 min_new_tries: 0
@@ -16,6 +16,9 @@ highlight_executed_trajectory: true
 
 map:
   type: "VoxgraphMap"
+  tsdf_needed: "false"
+  search_distance: 4
+  search_step: 0.5
 
 system_constraints:
   v_max: 1.0
@@ -28,7 +31,7 @@ trajectory_generator:
   bounding_volume_args: "/map_bounding_volume"
   clearing_radius: 0.0
 
-  type: "RRTStar"
+  type: "RRTStarVoxgraph"
   all_semgents_feasible: false
   crop_segments: false
   crop_margin: 0.3
@@ -98,7 +101,7 @@ back_tracker:
   stack_size: 10
 
 global_point_selector:
-  type: "BiggestFrontierSelector"
+  type: "EuclideanNormalizedFrontierSelector"
   submap_frontier_evaluator:
     type: "SubmapFrontierEvaluator"
 

@@ -42,6 +42,7 @@ class EvalData:
                 sys.exit(-1)
 
             self.ns_voxgraph = rospy.get_param('~ns_voxgraph', "/planner/planner_node")
+            self.eval_global_plan_frequency = rospy.get_param('~eval_global_plan_frequency', False)
 
             # Statistics
             self.eval_n_maps = 0
@@ -57,14 +58,20 @@ class EvalData:
             self.eval_data_file = open(os.path.join(self.eval_directory, "voxblox_data.csv"), 'wb')		# no need 
             self.eval_writer = csv.writer(self.eval_data_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL,  # no need 
                                       lineterminator='\n')												# no need 
-            self.eval_writer.writerow(['MapName', 'RosTime', 'WallTime', 'NPointclouds', 'CPUTime'])    # no need 
-            self.eval_writer.writerow(['Unit', 'seconds', 'seconds', '-', 'seconds'])					# no need 
+            if self.eval_global_plan_frequency:
+                self.eval_writer.writerow(['MapName', 'RosTime', 'WallTime', 'NPointclouds', 'CPUTime', 'GlobalTrajectoryExecuted'])    # no need
+                self.eval_writer.writerow(['Unit', 'seconds', 'seconds', '-', 'seconds', '-'])					# no need 
+            else:
+                self.eval_writer.writerow(['MapName', 'RosTime', 'WallTime', 'NPointclouds', 'CPUTime'])    # no need
+                self.eval_writer.writerow(['Unit', 'seconds', 'seconds', '-', 'seconds'])					# no need 
+
             self.eval_log_file = open(os.path.join(self.eval_directory, "data_log.txt"), 'a')	      # no need 			
 
             # Subscribers, Services
             self.ue_out_sub = rospy.Subscriber("ue_out_in", PointCloud2, self.ue_out_callback, queue_size=10)# no need 
             self.collision_sub = rospy.Subscriber("collision", String, self.collision_callback, queue_size=10)
             self.cpu_time_srv = rospy.ServiceProxy(self.ns_planner + "/get_cpu_time", SetBool)
+            self.global_trajectory_executed = rospy.ServiceProxy(self.ns_planner + "/global_trajectory_executed", SetBool)
 
             # Finish
             self.writelog("Data folder created at '%s'." % self.eval_directory)
@@ -151,7 +158,12 @@ class EvalData:
                 # Usually this means the planner died
                 self.stop_experiment("Planner Node died (cpu srv failed).")
                 return
-            self.eval_writer.writerow([voxgraph_collection_name, time_ros, time_real, self.eval_n_pointclouds, float(cpu.message)])
+            if self.eval_global_plan_frequency:
+                print(self.eval_global_plan_frequency)
+                global_trajectory_executed = self.global_trajectory_executed(True)
+                self.eval_writer.writerow([voxgraph_collection_name, time_ros, time_real, self.eval_n_pointclouds, float(cpu.message), global_trajectory_executed.success])
+            else:
+                self.eval_writer.writerow([voxgraph_collection_name, time_ros, time_real, self.eval_n_pointclouds, float(cpu.message)])
             self.eval_voxblox_service(os.path.join(self.eval_directory, "voxgraph_collections", voxgraph_collection_name + ".vxgrp"))
             self.eval_n_pointclouds = 0
             self.eval_n_maps += 1
@@ -165,7 +177,7 @@ class EvalData:
         self.eval_data_file.close()
         voxgraph_collection_path = os.path.join(self.eval_directory, "voxgraph_collections")
         n_voxgraph_collections = len([f for f in os.listdir(voxgraph_collection_path) if os.path.isfile(os.path.join(voxgraph_collection_path, f))])
-        self.writelog("Finished the simulation, %d/%d voxgraph_collection created." % (n_voxgraph_collections, self.eval_n_voxgraph_collections))
+        #self.writelog("Finished the simulation, %d/%d voxgraph_collection created." % (n_voxgraph_collections, self.eval_n_voxgraph_collections))
         self.eval_log_file.close()
         rospy.loginfo("On eval_data_node shutdown: closing data files.")
 

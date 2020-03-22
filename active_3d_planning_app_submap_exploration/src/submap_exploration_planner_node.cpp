@@ -3,6 +3,7 @@
 
 #include "active_3d_planning_voxgraph/initialization/voxgraph_package.h"
 #include "active_3d_planning_mav/initialization/mav_package.h"
+#include "active_3d_planning_safe_voxgraph/initialization/safe_voxgraph_package.h"
 
 #include <glog/logging.h>
 #include <chrono>
@@ -11,7 +12,7 @@
 
 int main(int argc, char **argv) {
     // leave some time for the rest to settle
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    //std::this_thread::sleep_for(std::chrono::seconds(3));
 
     // init ros
     ros::init(argc, argv, "voxgraph_local_planner_node");
@@ -19,6 +20,7 @@ int main(int argc, char **argv) {
     // prevent the linker from optimizing these packages away...
     active_3d_planning::initialize::voxgraph_package();
     active_3d_planning::initialize::mav_package();
+    active_3d_planning::initialize::safe_voxgraph_package();
 
     // Set logging to debug for testing
     ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug);

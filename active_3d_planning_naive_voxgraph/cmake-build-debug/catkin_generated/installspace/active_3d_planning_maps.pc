@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: active_3d_planning_maps
+Description: Description of active_3d_planning_maps
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lactive_3d_planning_maps
+Requires: active_3d_planning_core voxgraph

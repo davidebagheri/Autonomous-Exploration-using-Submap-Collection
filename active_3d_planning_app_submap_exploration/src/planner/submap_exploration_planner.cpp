@@ -1,5 +1,7 @@
 #include "ros/ros.h"
 #include "active_3d_planning_app_submap_exploration/planner/submap_exploration_planner.h"
+#include <algorithm>
+#include <random>
 
 namespace active_3d_planning{
     namespace ros {
@@ -9,17 +11,27 @@ namespace active_3d_planning{
                                                            : VoxgraphLocalPlanner(nh, nh_private, factory, param_map){
             SubmapExplorationPlanner::setupFromParamMap(param_map);
             advertiseServices();
-            advertisePublishers();
+
+            // Reset counts
             n_current_tree_samples_ = 0;
-            current_tree_max_gain_ = 0;
+            current_tree_max_gain_ = 0.0;
+
+            // Reset flags
             global_trajectory_planned_ = false;
+            global_point_computed_ = false;
+            global_plan_happened_ = false;
+            global_trajectory_executed_ = false;
         }
 
         void SubmapExplorationPlanner::setupFromParamMap(Module::ParamMap *param_map){
-            setParam<float>(param_map, "min_gain_threshold", &min_gain_threshold_, 100);
+            param_map_ = param_map;
+
+            setParam<float>(param_map, "min_gain_threshold", &min_gain_threshold_, 500);
             setParam<int>(param_map, "n_samples_threshold", &n_samples_threshold_, 100);
-            setParam<int>(param_map, "n_sample_tries_threshold", &n_samples_tries_threshold_, 1000);
-            setParam<float>(param_map, "global_replan_pos_threshold", &global_replan_pos_threshold_, 0.5);
+            setParam<int>(param_map, "n_sample_tries_threshold", &n_samples_tries_threshold_, 3000);
+            setParam<float>(param_map, "global_replan_pos_threshold", &global_replan_pos_threshold_, 0.3);
+            setParam<double>(param_map, "nearest_submap_origin_max_distance", &nearest_submap_origin_max_distance_, 5.0);
+            setParam<double>(param_map, "plan_time_limit", &plan_time_limit_, 4.0);
 
             // Setup members
             std::string args; // default args extends the parent namespace
@@ -31,28 +43,12 @@ namespace active_3d_planning{
                     args, *this, verbose_modules_);
         }
 
-        void SubmapExplorationPlanner::advertisePublishers(){
-            goal_point_pub_ = nh_private_.advertise<visualization_msgs::Marker>(
-                    "global_point",0);
-        }
-
         void SubmapExplorationPlanner::advertiseServices(){
             global_planning_cln_ = nh_private_.serviceClient<mav_planning_msgs::PlannerService>("plan");
             publish_global_trajectory_cln_ = nh_private_.serviceClient<std_srvs::Empty>("publish_path");
-
-            switch_plan_ = nh_private_.advertiseService("switch_plan", &SubmapExplorationPlanner::switchPlan, this);
-        }
-
-        bool SubmapExplorationPlanner::switchPlan(std_srvs::Empty::Request &req, std_srvs::Empty::Response& res){
-           static Eigen::Vector3d start;
-            static Eigen::Vector3d end;
-            static Eigen::Vector3d now;
-
-            if (plan_flag_==true) {
-                resetLocalPlanning();
-            }
-            plan_flag_ = !plan_flag_;
-            return true;
+            publish_global_trajectory_srv_ = nh_private_.advertiseService("global_trajectory_executed",
+                    &SubmapExplorationPlanner::globalTrajectoryCallback,
+                    this);
         }
 
         void SubmapExplorationPlanner::plan(){
@@ -83,106 +79,207 @@ namespace active_3d_planning{
         }
 
         PlanningStatus SubmapExplorationPlanner::stateMachine(){
-            if ((plan_flag_) or
-              (((n_current_tree_samples_ > n_samples_threshold_)
-                    or (new_segment_tries_ > n_samples_tries_threshold_))
-                    and (current_tree_max_gain_ < min_gain_threshold_))){
-                return GlobalPlanning;
+            if (isLocalGainLow()){
+                if (global_plan_happened_) {
+                    return LocalPlanning;
+                }
+
+                // Compute the gain of the best global point
+                if (!global_point_computed_){
+                    global_point_selector_->computeGlobalPoint();
+                    global_point_computed_ = true;
+                }
+                // Compare with the current maximum gain in the tree
+                if (global_point_selector_->getGlobalPointGain() > current_tree_max_gain_) {
+                    return GlobalPlanning;
+                }
             }
             return LocalPlanning;
         }
 
+        bool SubmapExplorationPlanner::isLocalGainLow(){
+            if (((n_current_tree_samples_ > n_samples_threshold_)
+                 or (new_segment_tries_ > n_samples_tries_threshold_))
+                and (current_tree_max_gain_ < min_gain_threshold_)) {
+                return true;
+            }
+            return false;
+        }
+
         void SubmapExplorationPlanner::localPlanningIteration(){
-            getNumSamplesAndMaxGain();
+            if (voxgraph_map_ptr_->hasActiveMapFinished()) {
+                // Update the global point selector
+                global_point_selector_->update();
 
-
-            static SubmapID active_submap_id = 0;
-
-            if (!voxgraph_map_ptr_->getSubmapCollection().empty()) {
-                if (voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() != active_submap_id){
-                    active_submap_id = voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID();
-                    global_point_selector_->update(active_submap_id - 1);
+                // Remove the oldest submap from the active submap
+                if (voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() > 1){
+                    SubmapID oldest_active_submap_id = voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() - 2;
+                    voxgraph_map_ptr_->getPlannerMapManager().removeSubmapFromActiveSubmap(
+                            oldest_active_submap_id);
                 }
+
+                // Reset control variable
+                global_point_computed_ = false;
+                global_plan_happened_ = false;
+                global_trajectory_executed_ = false;
             }
             loopIteration();
         }
 
+        bool SubmapExplorationPlanner::requestNextTrajectory(){
+            // Update the planning maps
+            voxgraph_map_ptr_->updatePlanningMaps();
+
+
+            // Request trajectory
+            RosPlanner::requestNextTrajectory();
+
+            // Update the counts
+            getNumSamplesAndMaxGain();
+        }
 
         void SubmapExplorationPlanner::globalPlanningIteration(){
+            static int marker_id = 0;
             if (!global_trajectory_planned_) {
-                // Request best point and compute trajectory
-                if ((voxgraph_map_ptr_->getSubmapCollection().empty()) or
-                        !(global_point_selector_->getGlobalPoint(&global_point_goal_))) {
-                    loopIteration();
-                    getNumSamplesAndMaxGain();
+                // Keep on with the local planning if there are no submaps yet
+                if (voxgraph_map_ptr_->getSubmapCollection().empty() or
+                voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() < 1){
+                    localPlanningIteration();
                     return;
                 }
 
-                // The robot is already in the right position
-                if (arrivedToPoint(global_point_goal_)) {
-                    resetLocalPlanning();
+                // Get the global point
+                global_point_selector_->getGlobalPoint(&global_point_goal_);
+
+                // Do not plan to the nearest origin if it is already close to the robot
+                Eigen::Vector3d voxel_position(global_point_goal_.pose.position.x,
+                                               global_point_goal_.pose.position.y,
+                                               global_point_goal_.pose.position.z);
+
+                // The robot is already in the right position or the global point is close to the robot
+                if (arrivedToPoint(global_point_goal_) or (voxgraph_map_ptr_->isObserved(voxel_position))) {
+                    ROS_INFO("[Global Planning] The robot is already in right position. Continue with the local planning");
+                    global_plan_happened_ = true;
+                    resetGlobalPlanning();
                     return;
-                }
-
-                // Planning to the requested point
-                if (globalPlanToPoint(global_point_goal_)) {
-
-                    visualization_msgs::Marker marker;
-
-                    marker.header.frame_id = "world";
-                    marker.header.stamp = ::ros::Time();
-                    marker.type = visualization_msgs::Marker::CUBE;
-                    marker.action = visualization_msgs::Marker::ADD;
-                    marker.scale.x = 0.20;
-                    marker.scale.y = 0.20;
-                    marker.scale.z = 0.20;
-                    marker.lifetime.sec = 10;
-                    marker.color.r = 1;
-                    marker.color.g = 0;
-                    marker.color.b = 0;
-                    marker.color.a = 1;
-
-                    marker.id = 0;
-                    marker.pose.position.x = global_point_goal_.pose.position.x;
-                    marker.pose.position.y = global_point_goal_.pose.position.y;
-                    marker.pose.position.z = global_point_goal_.pose.position.z;
-
-                    goal_point_pub_.publish(marker);
-
-                    ROS_WARN("[Global Planning] The requested point is reachable. Publishing the waypoints");
-                    publishGlobalWaypoints();
-                    global_trajectory_planned_ = true;
                 } else {
-                    resetLocalPlanning();
-                    ROS_WARN("[Global Planning] The requested point is not reachable");
-                    return;
+                    // Try to reach the given global point
+                    if (voxgraph_map_ptr_->isInsideAllSubmaps(voxel_position) && globalPlanToPoint(global_point_goal_)) {
+                        ROS_INFO("[Global Planning] Going to the requested global point");
+                        global_point_planned_ = global_point_goal_;
+                        publishGlobalWaypoints();
+                        global_point_selector_->update(false);
+                        // Try to reach a point near the given global point
+                    } else if (planToNearPoint(global_point_goal_)){
+                            ROS_INFO("[Global Planning] Going to a neighbour of the requested global point");
+                            publishGlobalWaypoints();
+                            global_point_selector_->update(false);
+                    } else {
+                        // Otherwise go to the nearest submap origin
+                        if (planToNearestSubmapOrigin(global_point_goal_)){
+                            publishGlobalWaypoints();
+                            global_point_selector_->update(false);
+                            ROS_INFO("[Global Planning] Going to the nearest submap origin");
+                        } else {
+                            // White flag: continue with the local planning
+                            ROS_INFO("[Global Planning] Not found any trajectory near the requested global point. Continuing the local planning");
+                            global_plan_happened_ = true;
+                            resetGlobalPlanning();
+                            return;
+                        }
+                    }
                 }
             }
 
-            if (arrivedToPoint(global_point_goal_)){
+            if (arrivedToPoint(global_point_planned_)){
+                ROS_INFO("[Global Planning] Robot has arrived to the selected point");
+                global_plan_happened_ = true;
                 resetLocalPlanning();
+                resetGlobalPlanning();
             }
+        }
+
+        bool SubmapExplorationPlanner::planToNearPoint(const geometry_msgs::PoseStamped& goal_point){
+            std::vector<Eigen::Vector3d> candidates;
+            Eigen::Vector3d goal_point_d(goal_point.pose.position.x, goal_point.pose.position.y, goal_point.pose.position.z);
+
+            // Get free points near the goal point
+            voxgraph_map_ptr_->getFreeNeighbouringPoints(goal_point_d, &candidates);
+
+            // Try to plan to them in a random order
+            auto rng = std::default_random_engine {};
+            std::shuffle(candidates.begin(), candidates.end(), rng);
+
+            ::ros::Time begin = ::ros::Time::now();
+            for (auto candidate : candidates){
+                // Set a time limit
+                ::ros::Time begin_iteration = ::ros::Time::now();
+                if (((begin_iteration - begin).toSec()) > plan_time_limit_) return false;
+
+                geometry_msgs::PoseStamped candidate_pose;
+                candidate_pose.pose.position.x = candidate.x();
+                candidate_pose.pose.position.y = candidate.y();
+                candidate_pose.pose.position.z = candidate.z();
+                if (globalPlanToPoint(candidate_pose)) {
+                    global_point_planned_ = candidate_pose;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool SubmapExplorationPlanner::planToNearestSubmapOrigin(const geometry_msgs::PoseStamped& goal_point){
+            geometry_msgs::PoseStamped nearest_submap_origin = getNearestSubmapOrigin(goal_point);
+
+            // Do not plan to it if the point is too far from the real goal
+            Eigen::Vector3d nearest_origin_d(nearest_submap_origin.pose.position.x,
+                                             nearest_submap_origin.pose.position.y,
+                                             nearest_submap_origin.pose.position.z);
+            if (distance(nearest_origin_d, goal_point) > nearest_submap_origin_max_distance_) return false;
+
+
+            if (globalPlanToPoint(nearest_submap_origin)){
+                global_point_planned_ = nearest_submap_origin;
+                return true;
+            }
+            return false;
         }
 
         void SubmapExplorationPlanner::resetLocalPlanning() {
             // Reset the state machine control variables
             global_trajectory_planned_ = false;
+            global_point_selector_->resetGlobalPointGain();
             n_current_tree_samples_ = 0;
-            current_tree_max_gain_ = 0;
+            current_tree_max_gain_ = 0.0;
+
+            // Reinitialize the local planner and the active area
             RosPlanner::initializePlanning();
-            voxgraph_map_ptr_->getPlannerMapManager().emtpyActiveSubmap();
-            std::cout << "n samples: " << n_current_tree_samples_ << std::endl;
+            voxgraph_map_ptr_->getPlannerMapManager().emptyActiveSubmap();
+
+            // Reinitialize the local planner backtracker
+            std::string args;
+            std::string param_ns = (*param_map_)["param_namespace"];
+            setParam<std::string>(param_map_, "back_tracker_args", &args,
+                                  param_ns + "/back_tracker");
+
+            back_tracker_ = getFactory().createModule<BackTracker>(
+                    args, *this, false);
+        }
+
+        void SubmapExplorationPlanner::resetGlobalPlanning() {
+            global_trajectory_planned_ = false;
+            global_point_selector_->resetGlobalPointGain();
         }
 
         bool SubmapExplorationPlanner::arrivedToPoint(const geometry_msgs::PoseStamped& point){
-            return distanceRobotToPoint(point) < global_replan_pos_threshold_;
+            return (distance(current_position_, point) < global_replan_pos_threshold_);
         }
 
-
-        float SubmapExplorationPlanner::distanceRobotToPoint(const geometry_msgs::PoseStamped& point){
-            return std::sqrt(std::pow(point.pose.position.x - current_position_.x(),2) +
-                              std::pow(point.pose.position.y - current_position_.y(),2) +
-                              std::pow(point.pose.position.z - current_position_.z(),2));
+        float SubmapExplorationPlanner::distance(const Eigen::Vector3d point_A,
+                const geometry_msgs::PoseStamped& point_B){
+            return std::sqrt(std::pow(point_B.pose.position.x - point_A.x(),2) +
+                             std::pow(point_B.pose.position.y - point_A.y(),2) +
+                             std::pow(point_B.pose.position.z - point_A.z(),2));
         }
 
         bool SubmapExplorationPlanner::globalPlanToPoint(const geometry_msgs::PoseStamped& goal_point){
@@ -199,6 +296,9 @@ namespace active_3d_planning{
             // Global planning
             global_planning_cln_.call(srv);
 
+            if (srv.response.success) {
+                global_trajectory_planned_ = true;
+            }
             return srv.response.success;
         }
 
@@ -206,6 +306,7 @@ namespace active_3d_planning{
             std_srvs::Empty srv;
             if (publish_global_trajectory_cln_.call(srv)){
                 ROS_INFO("[Global Planning] Waypoints published for trajectory computation");
+                global_trajectory_executed_ = true;
             }
         }
 
@@ -234,14 +335,25 @@ namespace active_3d_planning{
             }
         }
 
-        void SubmapExplorationPlanner::updateGlobalPointSelector(const SubmapID& finished_submap_ID){
-            global_point_selector_->update(finished_submap_ID);
+        geometry_msgs::PoseStamped SubmapExplorationPlanner::getNearestSubmapOrigin(const geometry_msgs::PoseStamped& point){
+            double distance_to_point = INFINITY;
+            geometry_msgs::PoseStamped result;
+            for (auto& submap_id : voxgraph_map_ptr_->getSubmapCollection().getIDs()){
+                Point submap_origin(voxgraph_map_ptr_->getSubmapCollection().getSubmap(submap_id).getPose().getPosition());
+                Eigen::Vector3d submap_origin_d(submap_origin.x(), submap_origin.y(), submap_origin.z());
+                if (distance(submap_origin_d, point) < distance_to_point){
+                    result.pose.position.x = submap_origin_d.x();
+                    result.pose.position.y = submap_origin_d.y();
+                    result.pose.position.z = submap_origin_d.z();
+                }
+            }
+            return result;
         }
 
-        const Point SubmapExplorationPlanner::getRobotPosition(){
-            return Point((float)current_position_.x(), (float)current_position_.y(), (float)current_position_.z());
+        bool SubmapExplorationPlanner::globalTrajectoryCallback(std_srvs::SetBool::Request &req, std_srvs::SetBool::Response &res) {
+            res.success = global_trajectory_executed_;
+            return true;
         }
-
     }
 }
 

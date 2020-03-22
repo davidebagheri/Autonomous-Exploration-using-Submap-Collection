@@ -49,14 +49,15 @@ VoxgraphNodeEvaluator::VoxgraphNodeEvaluator(const ros::NodeHandle &nh, const ro
         nh_private_(nh_private),
         submap_server_(nh, nh_private){
     global_map_pub_ = nh_private_.advertise<pcl::PointCloud<pcl::PointXYZI>>("voxels", 1, true);
+    bounding_box_pub_ = nh_private_.advertise<visualization_msgs::Marker>("buonding_box", 1, true);
 
     eval_srv_ = nh_private_.advertiseService("evaluate", &VoxgraphNodeEvaluator::evaluate, this);
-    nh_private_.param<float>("/map_bounding_volume/x_min",bounding_box_.x_min_, 0.0);
-    nh_private_.param<float>("/map_bounding_volume/x_max",bounding_box_.x_max_, 0.0);
-    nh_private_.param<float>("/map_bounding_volume/y_min", bounding_box_.y_min_, 0.0);
-    nh_private_.param<float>("/map_bounding_volume/y_max", bounding_box_.y_max_, 0.0);
-    nh_private_.param<float>("/map_bounding_volume/z_min", bounding_box_.z_min_, 0.0);
-    nh_private_.param<float>("/map_bounding_volume/z_max", bounding_box_.z_max_, 0.0);
+    nh_private_.param<float>("/map_bounding_volume/x_min",bounding_box_.min_vertex.x(), 0.0);
+    nh_private_.param<float>("/map_bounding_volume/x_max",bounding_box_.max_vertex.x(), 0.0);
+    nh_private_.param<float>("/map_bounding_volume/y_min", bounding_box_.min_vertex.y(), 0.0);
+    nh_private_.param<float>("/map_bounding_volume/y_max", bounding_box_.max_vertex.y(), 0.0);
+    nh_private_.param<float>("/map_bounding_volume/z_min", bounding_box_.min_vertex.z(), 0.0);
+    nh_private_.param<float>("/map_bounding_volume/z_max", bounding_box_.max_vertex.z(), 0.0);
 }
 
 bool VoxgraphNodeEvaluator::evaluate(std_srvs::Empty::Request &req,
@@ -158,35 +159,54 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
 
     int observed_voxels = 0;
 
-    float map_volume = (bounding_box_.x_max_ - bounding_box_.x_min_) *
-                       (bounding_box_.y_max_ - bounding_box_.y_min_) *
-                       (bounding_box_.z_max_ - bounding_box_.z_min_);
+    float map_volume = (bounding_box_.max_vertex.x() - bounding_box_.min_vertex.x()) *
+                       (bounding_box_.max_vertex.y() - bounding_box_.min_vertex.y()) *
+                       (bounding_box_.max_vertex.z() - bounding_box_.min_vertex.z());
     float voxel_volume = std::pow(submap_server_.getSubmapCollectionPtr()->getConfig().esdf_voxel_size, 3);
 
     // Load map
     submap_server_.getSubmapCollectionPtr()->clear();
     submap_server_.loadMap(p_target_dir_ + "/voxgraph_collections/" + map_name + ".vxgrp");
 
-    voxblox::Layer<voxblox::TsdfVoxel> global_map(submap_server_.getSubmapCollectionPtr()->getConfig().tsdf_voxel_size,
+    voxblox::Layer<voxblox::EsdfVoxel> global_map(submap_server_.getSubmapCollectionPtr()->getConfig().tsdf_voxel_size,
                                                   submap_server_.getSubmapCollectionPtr()->getConfig().tsdf_voxels_per_side);
 
     // Compute global map
     for (auto id : submap_server_.getSubmapCollectionPtr()->getIDs()) {
-        voxblox::Layer<voxblox::TsdfVoxel> temp(submap_server_.getSubmapCollectionPtr()->getConfig().tsdf_voxel_size,
-                                                submap_server_.getSubmapCollectionPtr()->getConfig().tsdf_voxels_per_side);
-        voxblox::transformLayer(submap_server_.getSubmapCollectionPtr()->getSubmap(id).getTsdfMap().getTsdfLayer(),
+        voxblox::Layer<voxblox::EsdfVoxel> temp(submap_server_.getSubmapCollectionPtr()->getConfig().esdf_voxel_size,
+                                                submap_server_.getSubmapCollectionPtr()->getConfig().esdf_voxels_per_side);
+        voxblox::naiveTransformLayer(submap_server_.getSubmapCollectionPtr()->getSubmap(id).getEsdfMap().getEsdfLayer(),
                                 submap_server_.getSubmapCollectionPtr()->getSubmap(id).getPose(),
                                 &temp);
-        mergeTsdfLayerAInLayerB(temp, &global_map);
+        mergeEsdfLayerAInLayerB(temp, &global_map);
 
         // Visualize
         if (global_map_pub_.getNumSubscribers() > 0) {
             pcl::PointCloud<pcl::PointXYZI> tsdf_pointcloud;
             tsdf_pointcloud.header.frame_id = "world";
-            voxblox::createDistancePointcloudFromTsdfLayer(
+            voxblox::createDistancePointcloudFromEsdfLayer(
                     global_map,
                     &tsdf_pointcloud);
             global_map_pub_.publish(tsdf_pointcloud);
+        }
+        if (bounding_box_pub_.getNumSubscribers() > 0) {
+            visualization_msgs::Marker marker;
+            marker.header.frame_id = "world";
+            marker.header.stamp = ros::Time();
+            marker.id = 0;
+            marker.type = visualization_msgs::Marker::CUBE;
+            marker.action = visualization_msgs::Marker::ADD;
+            marker.pose.position.x = (bounding_box_.max_vertex.x() + bounding_box_.min_vertex.x()) / 2;
+            marker.pose.position.y = (bounding_box_.max_vertex.y() + bounding_box_.min_vertex.y()) / 2;
+            marker.pose.position.z = (bounding_box_.max_vertex.z() + bounding_box_.min_vertex.z()) / 2;
+            marker.scale.x = (bounding_box_.max_vertex.x() - bounding_box_.min_vertex.x());
+            marker.scale.y = (bounding_box_.max_vertex.y() - bounding_box_.min_vertex.y());
+            marker.scale.z = (bounding_box_.max_vertex.z() - bounding_box_.min_vertex.z());
+            marker.color.a = 0.5; // Don't forget to set the alpha!
+            marker.color.r = 1.0;
+            marker.color.g = 1.0;
+            marker.color.b = 1.0;
+            bounding_box_pub_.publish( marker );
         }
     }
 
@@ -194,7 +214,7 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
     global_map.getAllAllocatedBlocks(&block_idx_list);
 
     for (const voxblox::BlockIndex &block_idx : block_idx_list) {
-        typename voxblox::Block<voxblox::TsdfVoxel>::ConstPtr block = global_map.getBlockPtrByIndex(block_idx);
+        typename voxblox::Block<voxblox::EsdfVoxel>::ConstPtr block = global_map.getBlockPtrByIndex(block_idx);
 
         // Iterate over all the voxels in the layer
         for (voxblox::IndexElement voxel_idx = 0;
@@ -203,7 +223,7 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
             voxblox::Point voxel_coords = block->computeCoordinatesFromLinearIndex(voxel_idx);
             if (!bounding_box_.contains(voxel_coords)) continue;
 
-            if (block->getVoxelByLinearIndex(voxel_idx).weight > 0) {
+            if (block->getVoxelByLinearIndex(voxel_idx).observed == true) {
                 observed_voxels++;
             }
         }

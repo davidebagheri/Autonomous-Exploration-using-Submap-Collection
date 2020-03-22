@@ -7,8 +7,7 @@ namespace active_3d_planning {
         ModuleFactoryRegistry::Registration<NaiveEvaluatorVoxgraph>
                 NaiveEvaluatorVoxgraph::registration("NaiveEvaluatorVoxgraph");
 
-        NaiveEvaluatorVoxgraph::NaiveEvaluatorVoxgraph(PlannerI &planner) : NaiveEvaluator(planner){
-        }
+        NaiveEvaluatorVoxgraph::NaiveEvaluatorVoxgraph(PlannerI &planner) : NaiveEvaluator(planner){}
 
         void NaiveEvaluatorVoxgraph::setupFromParamMap(Module::ParamMap *param_map){
             NaiveEvaluator::setupFromParamMap(param_map);

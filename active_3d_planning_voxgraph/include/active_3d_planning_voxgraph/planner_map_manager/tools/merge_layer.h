@@ -22,15 +22,21 @@ namespace active_3d_planning{
     template <>
     void copyVoxelAInVoxelB(const EsdfVoxel& voxel_A, EsdfVoxel* voxel_B);
 
+    void pessimisticEsdfVoxelMerge(const EsdfVoxel& voxel_A, EsdfVoxel* voxel_B);
+
     void copyEsdfLayerAInLayerB(const Layer<EsdfVoxel>& layer_A, Layer<EsdfVoxel>* layer_B);
 
     void copyTsdfLayerAInLayerB(const Layer<TsdfVoxel>& layer_A, Layer<TsdfVoxel>* layer_B);
+
+    void copyTsdfLayerAInLayerBAndSetBlockID(const Layer<TsdfVoxel>& layer_A, Layer<TsdfVoxel>* layer_B, uint8_t id);
 
     template <typename VoxelType>
     void mergeBlockAInBlockB(const Block<VoxelType>& block_A, Block<VoxelType>* block_B_ptr);
 
     template <typename VoxelType>
     void copyBlockAInBlockB(const Block<VoxelType>& block_A, Block<VoxelType>* block_B_ptr);
+
+    void pessimisticEsdfBlockMerge(const Block<EsdfVoxel>& block_A, Block<EsdfVoxel>* block_B_ptr);
 
     template <typename VoxelType>
     void mergeLayerAInLayerB(const Layer<VoxelType>& layer_A, Layer<VoxelType>* layer_B);
@@ -39,7 +45,7 @@ namespace active_3d_planning{
 
     void mergeTsdfLayerAInLayerB(const Layer<TsdfVoxel>& layer_A, Layer<TsdfVoxel>* layer_B);
 
-    void mergeLayerAndGetUpdatedBlocksIDS(const Layer<TsdfVoxel>& layer_A, Layer<TsdfVoxel>* layer_B, BlockIndexList* new_blocks_list);
+    void pessimisticEsdfMerge(const Layer<EsdfVoxel>& layer_A, Layer<EsdfVoxel>* layer_B, BlockIndexList* new_blocks_list);
 }
 
 

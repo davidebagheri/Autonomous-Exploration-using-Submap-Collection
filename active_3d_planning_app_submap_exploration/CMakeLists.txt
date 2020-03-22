@@ -14,24 +14,37 @@ catkin_package()
 #############
 cs_add_library(${PROJECT_NAME}
         # Modules
+        # Trajectory generator
+        src/module/trajectory_generator/rrt_star_voxgraph.cpp
+        # Trajectory evaluator
         src/module/sensor_model/iterative_ray_caster_voxgraph.cpp
         src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp
-        src/module/trajectory_evaluator/voxel_weight_evaluator.cpp
+        src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp
         # Global point selector
-        src/global_point_selector/global_point_selector.cpp
+        src/module/global_point_selector/global_point_selector.cpp
         # Frontier selector
-        src/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp
-        src/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp
-        src/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp
-        src/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp
+        src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp
+        src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp
+        src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp
+        src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp
         # Planners
         src/planner/voxgraph_local_planner.cpp
         src/planner/submap_exploration_planner.cpp
+        src/planner/naive_voxgraph_exploration_planner.cpp
         )
 
 ############
 # BINARIES #
 ############
+cs_add_executable(naive_voxgraph_exploration_planner_node
+        src/naive_voxgraph_exploration_planner_node.cpp
+        )
+target_link_libraries(naive_voxgraph_exploration_planner_node ${catkin_LIBRARIES} ${PROJECT_NAME})
 
 cs_add_executable(voxgraph_local_planner_node
         src/voxgraph_local_planner_node.cpp
@@ -47,6 +60,12 @@ cs_add_executable(voxgraph_node_evaluator
         src/experiments/voxgraph_node_evaluator.cpp
         )
 target_link_libraries(voxgraph_node_evaluator ${catkin_LIBRARIES} ${PROJECT_NAME})
+
+cs_add_executable(distance_run_node
+        src/experiments/distance_run_node.cpp
+        )
+target_link_libraries(distance_run_node ${catkin_LIBRARIES} ${PROJECT_NAME})
+
 
 cs_install()
 cs_export()
