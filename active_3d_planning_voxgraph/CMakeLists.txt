@@ -8,7 +8,7 @@ add_definitions(-std=c++11)
 
 catkin_package()
 
-cs_add_library(${PROJECT_NAME}
+cs_add_library(${PROJECT_NAME} SHARED
         # Map
         src/map/voxgraph.cpp
         # Initalization

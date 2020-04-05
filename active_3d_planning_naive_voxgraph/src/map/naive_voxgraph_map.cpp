@@ -16,7 +16,6 @@ namespace active_3d_planning {
 
             // Set istances of Voxgraph, the Planner Map Manager and the Frontiers Evaluator
             voxgraph_mapper_.reset(new voxgraph::VoxgraphMapper(nh, nh_private));
-
             // cache constants
             c_voxel_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size;
             c_block_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size *
@@ -27,6 +26,7 @@ namespace active_3d_planning {
 
 
         bool NaiveVoxgraphMap::isTraversable(const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation) {
+            return false;
             double distance = 0.0;
 
             voxblox::Point voxel_position(position.x(), position.y(), position.z());
@@ -45,6 +45,11 @@ namespace active_3d_planning {
         }
 
         bool NaiveVoxgraphMap::isObserved(const Eigen::Vector3d &point) {
+            return false;
+            if (voxgraph_mapper_->getSubmapCollection().empty()) {
+                return false;
+            };
+
             voxblox::Point voxel_position(point.x(), point.y(), point.z());
             for (const auto& submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()) {
                 voxblox::Point voxel_point_S = voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getInversePose() * voxel_position;
@@ -149,13 +154,14 @@ namespace active_3d_planning {
 
         bool NaiveVoxgraphMap::hasActiveMapFinished(){
             static int active_submap_id = 0;
+
             if (!voxgraph_mapper_->getSubmapCollection().empty()) {
                 if (voxgraph_mapper_->getSubmapCollection().getActiveSubmapID() != active_submap_id){
                     active_submap_id = voxgraph_mapper_->getSubmapCollection().getActiveSubmapID();
-
                     return true;
                 }
             }
+            ROS_WARN("IS hasActiveMapFinished fine");
             return false;
         }
 

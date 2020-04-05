@@ -18,14 +18,18 @@ namespace active_3d_planning {
             setParam<bool>(param_map, "tsdf_needed", &tsdf_needed_, true);
             setParam<double>(param_map, "search_distance", &search_distance_, 3.0);
             setParam<double>(param_map, "search_step", &search_step_, 0.5);
+            setParam<double>(param_map, "neighbourhood_distance_", &neighbourhood_distance_, 3.0);
+            setParam<double>(param_map, "global_plan_security_distance", &global_plan_security_distance_, 0.4);
 
             // Set istances of Voxgraph, the Planner Map Manager and the Frontiers Evaluator
             voxgraph_mapper_.reset(new voxgraph::VoxgraphMapper(nh, nh_private));
             planner_map_manager_.reset(new PlannerMapManager(
                     &voxgraph_mapper_->getSubmapCollection(),
+                    &voxgraph_mapper_->getMapTracker(),
                     &voxgraph_mapper_->getRegistrationConstraint(),
                     tsdf_needed_,
                     voxgraph_mapper_->getSubmapConfig()));
+
 
             std::string temp_args;
             std::string ns = (*param_map)["param_namespace"];
@@ -67,6 +71,16 @@ namespace active_3d_planning {
             if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()->getDistanceAtPosition(position, &distance)) {
                 // This means the voxel is observed
                 return (distance > planner_.getSystemConstraints().collision_radius);
+            }
+            return false;
+        }
+
+        bool VoxgraphMap::isTraversable(const double& collision_radius, const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation){
+            double distance = 0.0;
+
+            if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()->getDistanceAtPosition(position, &distance)) {
+                // This means the voxel is observed
+                return (distance > collision_radius);
             }
             return false;
         }
@@ -248,6 +262,27 @@ namespace active_3d_planning {
             return true;;
         }
 
+        bool VoxgraphMap::isTraversableClosePath(const EigenTrajectoryPointVector& trajectory){
+            // default just checks every point
+            for (const EigenTrajectoryPoint &point : trajectory) {
+                if ((point.position_W - planner_.getCurrentPosition()).norm() > neighbourhood_distance_) continue;
+
+                if (!isObserved(point.position_W)) continue;
+
+
+                double distance = 0.0;
+
+                if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()->getDistanceAtPosition(point.position_W, &distance)) {
+                    // This means the voxel is observed
+                    if ((distance<=1) and (distance > -0.2)){
+                        std::cout << "il punto che fa merda ha distanza " << distance << std::endl;
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         void VoxgraphMap::getFreeNeighbouringPoints(const Eigen::Vector3d &point, std::vector<Eigen::Vector3d>* free_points){
             visualization_msgs::Marker marker;
             visualization_msgs::MarkerArray marker_array;
@@ -272,9 +307,10 @@ namespace active_3d_planning {
             while (candidate_point.x() <= x_max){
                 while (candidate_point.y() <= y_max){
                     while (candidate_point.z() <= z_max){
-
-                        if (isTraversableInAllSubmaps(candidate_point) && isInsideAllSubmaps(candidate_point)){
-                            if (candidate_point.z() < 1)
+                        voxblox::Point candidate_point_M = get_T_M_O() * voxblox::Point(candidate_point.x(), candidate_point.y(), candidate_point.z());
+                        Eigen::Vector3d candidate_point_d_M(candidate_point_M.x(), candidate_point_M.y(), candidate_point_M.z());
+                        if (isTraversableInAllSubmaps(candidate_point_d_M) && isInsideAllSubmaps(candidate_point_d_M)){
+                            if (candidate_point.z() < 1.3)
                                 free_points->emplace_back(candidate_point);
                             marker.color.r = 1;
                             marker.color.g = 0;
@@ -321,19 +357,11 @@ namespace active_3d_planning {
             // Update planner maps
             planner_map_manager_->updateActiveSubmap();
 
-            //ros::Time beg = ros::Time::now();
             planner_map_manager_->updateCurrentNeighbours(
                     voxgraph_mapper_->getSubmapCollection().getActiveSubmapID());
-            /*ros::Time end = ros::Time::now();
-
-            std::ofstream fout;
-            fout.open("/home/davide/Desktop/map_time.txt", std::ios::app );
-            if (!fout.is_open()) std::cout << "not open";
-
-            fout << time_transform + (end - beg).toNSec() / 1000000 << ", ";*/
 
             // Planner maps visualization
-            publishActiveSubmap();
+            publishPlannerActiveSubmap();
             publishCurrentNeighbours();
         }
 
@@ -351,7 +379,7 @@ namespace active_3d_planning {
         }
 
         // Visualization
-        void VoxgraphMap::publishActiveSubmap(){
+        void VoxgraphMap::publishPlannerActiveSubmap(){
             if (pointcloud_tsdf_active_submap_pub_.getNumSubscribers() > 0){
                 pcl::PointCloud<pcl::PointXYZI> tsdf_pointcloud;
                 tsdf_pointcloud.header.frame_id = "world";

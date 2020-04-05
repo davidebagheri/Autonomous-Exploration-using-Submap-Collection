@@ -5,12 +5,11 @@ planner:
     submap_creation_interval: 30
     pointcloud_topic: "/unreal/unreal_sensor_model/ue_sensor_out"
     subscriber_queue_length: 1
-    mission_frame: "world"
-    odom_frame: "world"
-    base_link_frame: "firefly/drifted_base_link"
-    odom_frame_corrected: "odom_corrected"
-    base_link_frame_corrected: "robot_corrected"
-    sensor_frame_corrected: "sensor_corrected"
+    input_odom_frame: "world"
+    input_base_link_frame: "camera_link"
+    output_mission_frame: "mission"
+    output_base_link_frame: "imu_voxgraph"
+    output_sensor_frame: "sensor_voxgraph"    
     use_tf_transforms: true
     tsdf_integrator:
       tsdf_voxel_size: 0.20
@@ -47,9 +46,6 @@ planner:
               y_y:     1.0
               z_z:     0.1
               yaw_yaw: 0.0001
-    T_base_link_sensor:
-        - [0.0,  0.0, 1.0,  0.0]
-        - [-1.0,  0.0,  0.0, 0.0]
-        - [0.0,  -1.0, 0.0,  0.0]
-        - [0.0,  0.0, 0.0,  1.0]
+
+
 

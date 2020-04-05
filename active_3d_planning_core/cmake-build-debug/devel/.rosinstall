@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_core/cmake-build-debug/devel/setup.sh

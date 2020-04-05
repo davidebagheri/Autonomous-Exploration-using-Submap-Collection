@@ -271,19 +271,6 @@ CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/sensor_msgs_generate_mess
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -347,14 +334,27 @@ CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/voxblox_msgs_generate_mes
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/voxgraph_node_evaluator.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/voxgraph_node_evaluator.dir/build.make CMakeFiles/voxgraph_node_evaluator.dir/depend
 	$(MAKE) -f CMakeFiles/voxgraph_node_evaluator.dir/build.make CMakeFiles/voxgraph_node_evaluator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=38,39 "Built target voxgraph_node_evaluator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=39,40 "Built target voxgraph_node_evaluator"
 .PHONY : CMakeFiles/voxgraph_node_evaluator.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/voxgraph_node_evaluator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/voxgraph_node_evaluator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/voxgraph_node_evaluator.dir/rule
@@ -426,19 +426,6 @@ CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/sensor_msgs_gener
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -502,14 +489,27 @@ CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/voxblox_msgs_gene
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/submap_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/submap_exploration_planner_node.dir/build.make CMakeFiles/submap_exploration_planner_node.dir/depend
 	$(MAKE) -f CMakeFiles/submap_exploration_planner_node.dir/build.make CMakeFiles/submap_exploration_planner_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=34,35 "Built target submap_exploration_planner_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=35,36 "Built target submap_exploration_planner_node"
 .PHONY : CMakeFiles/submap_exploration_planner_node.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/submap_exploration_planner_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/submap_exploration_planner_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/submap_exploration_planner_node.dir/rule
@@ -581,19 +581,6 @@ CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/sensor_msgs_generate_
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -657,14 +644,27 @@ CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/voxblox_msgs_generate
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/voxgraph_local_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/voxgraph_local_planner_node.dir/build.make CMakeFiles/voxgraph_local_planner_node.dir/depend
 	$(MAKE) -f CMakeFiles/voxgraph_local_planner_node.dir/build.make CMakeFiles/voxgraph_local_planner_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=36,37 "Built target voxgraph_local_planner_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=37,38 "Built target voxgraph_local_planner_node"
 .PHONY : CMakeFiles/voxgraph_local_planner_node.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/voxgraph_local_planner_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/voxgraph_local_planner_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/voxgraph_local_planner_node.dir/rule
@@ -736,19 +736,6 @@ CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/sensor_ms
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -812,14 +799,27 @@ CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/voxblox_m
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/naive_voxgraph_exploration_planner_node.dir/build.make CMakeFiles/naive_voxgraph_exploration_planner_node.dir/depend
 	$(MAKE) -f CMakeFiles/naive_voxgraph_exploration_planner_node.dir/build.make CMakeFiles/naive_voxgraph_exploration_planner_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=32,33 "Built target naive_voxgraph_exploration_planner_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=33,34 "Built target naive_voxgraph_exploration_planner_node"
 .PHONY : CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/naive_voxgraph_exploration_planner_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/naive_voxgraph_exploration_planner_node.dir/rule
@@ -1754,19 +1754,6 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/sensor_
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -1830,14 +1817,27 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/voxblox
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/depend
 	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target active_3d_planning_app_submap_exploration"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target active_3d_planning_app_submap_exploration"
 .PHONY : CMakeFiles/active_3d_planning_app_submap_exploration.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 19
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/active_3d_planning_app_submap_exploration.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/active_3d_planning_app_submap_exploration.dir/rule
@@ -3030,7 +3030,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration_package.dir/all: CMakeFiles
 
 # Build rule for subdir invocation for target.
 CMakeFiles/active_3d_planning_app_submap_exploration_package.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/active_3d_planning_app_submap_exploration_package.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/active_3d_planning_app_submap_exploration_package.dir/rule
@@ -3777,19 +3777,6 @@ CMakeFiles/distance_run_node.dir/all: CMakeFiles/sensor_msgs_generate_messages_c
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/maplab_msgs_generate_messages_cpp.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/bond_generate_messages_nodejs.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/voxblox_msgs_generate_messages_py.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
@@ -3853,14 +3840,27 @@ CMakeFiles/distance_run_node.dir/all: CMakeFiles/voxblox_msgs_generate_messages_
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/actionlib_generate_messages_lisp.dir/all
 CMakeFiles/distance_run_node.dir/all: CMakeFiles/pcl_msgs_generate_messages_lisp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf_generate_messages_cpp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/visualization_msgs_generate_messages_cpp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/dynamic_reconfigure_gencfg.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/nav_msgs_generate_messages_py.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/map_msgs_generate_messages_cpp.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/actionlib_generate_messages_py.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+CMakeFiles/distance_run_node.dir/all: CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f CMakeFiles/distance_run_node.dir/build.make CMakeFiles/distance_run_node.dir/depend
 	$(MAKE) -f CMakeFiles/distance_run_node.dir/build.make CMakeFiles/distance_run_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=19,20 "Built target distance_run_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=20,21 "Built target distance_run_node"
 .PHONY : CMakeFiles/distance_run_node.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/distance_run_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/distance_run_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/distance_run_node.dir/rule
@@ -4820,7 +4820,7 @@ gtest/preinstall: gtest/gtest/preinstall
 gtest/CMakeFiles/gmock_main.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=24,25,26,27 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=25,26,27,28 "Built target gmock_main"
 .PHONY : gtest/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4847,7 +4847,7 @@ gtest/CMakeFiles/gmock_main.dir/clean:
 gtest/CMakeFiles/gmock.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=21,22,23 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=22,23,24 "Built target gmock"
 .PHONY : gtest/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4893,7 +4893,7 @@ gtest/gtest/preinstall:
 gtest/gtest/CMakeFiles/gtest_main.dir/all: gtest/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=30,31 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=31,32 "Built target gtest_main"
 .PHONY : gtest/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4920,7 +4920,7 @@ gtest/gtest/CMakeFiles/gtest_main.dir/clean:
 gtest/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=28,29 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=29,30 "Built target gtest"
 .PHONY : gtest/gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.

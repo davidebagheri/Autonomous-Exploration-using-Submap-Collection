@@ -1,4 +1,5 @@
 #include "active_3d_planning_app_submap_exploration/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.h"
+#include <iostream>
 
 namespace active_3d_planning{
     Frontier::Frontier(){
@@ -46,10 +47,15 @@ namespace active_3d_planning{
         n_points_++;
     }
 
-    void Frontier::transformFrontier(const Transformation& T_M_S){
+    void Frontier::transformFrontier(const Transformation& T_S2_S1){
         for (auto& voxel_center : frontier_points_){
-            voxel_center = T_M_S * voxel_center;
+            voxel_center = T_S2_S1 * voxel_center;
         }
+        for (auto& quarantine_voxel_center : quarantine_points_){
+            quarantine_voxel_center = T_S2_S1 * quarantine_voxel_center;
+        }
+
+        centroid_ = T_S2_S1 * centroid_;
     }
 
     const int& Frontier::getNumberOfPoints(){

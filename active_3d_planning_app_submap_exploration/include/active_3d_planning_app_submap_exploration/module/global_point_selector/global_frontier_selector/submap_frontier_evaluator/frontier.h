@@ -36,7 +36,7 @@ namespace active_3d_planning {
 
         void addQuarantinePoint(const Point &new_point);
 
-        void transformFrontier(const Transformation &T_M_S);
+        void transformFrontier(const Transformation &T_S2_S1);
 
     private:
         int n_points_;

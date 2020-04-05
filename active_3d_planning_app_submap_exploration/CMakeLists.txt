@@ -13,6 +13,8 @@ catkin_package()
 # LIBRARIES #
 #############
 cs_add_library(${PROJECT_NAME}
+        # Tools
+        src/tools/transformations.cpp
         # Modules
         # Trajectory generator
         src/module/trajectory_generator/rrt_star_voxgraph.cpp

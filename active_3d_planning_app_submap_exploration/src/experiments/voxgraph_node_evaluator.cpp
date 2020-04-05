@@ -52,12 +52,12 @@ VoxgraphNodeEvaluator::VoxgraphNodeEvaluator(const ros::NodeHandle &nh, const ro
     bounding_box_pub_ = nh_private_.advertise<visualization_msgs::Marker>("buonding_box", 1, true);
 
     eval_srv_ = nh_private_.advertiseService("evaluate", &VoxgraphNodeEvaluator::evaluate, this);
-    nh_private_.param<float>("/map_bounding_volume/x_min",bounding_box_.min_vertex.x(), 0.0);
-    nh_private_.param<float>("/map_bounding_volume/x_max",bounding_box_.max_vertex.x(), 0.0);
-    nh_private_.param<float>("/map_bounding_volume/y_min", bounding_box_.min_vertex.y(), 0.0);
-    nh_private_.param<float>("/map_bounding_volume/y_max", bounding_box_.max_vertex.y(), 0.0);
-    nh_private_.param<float>("/map_bounding_volume/z_min", bounding_box_.min_vertex.z(), 0.0);
-    nh_private_.param<float>("/map_bounding_volume/z_max", bounding_box_.max_vertex.z(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/x_min",bounding_box_.min_vertex.x(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/x_max",bounding_box_.max_vertex.x(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/y_min", bounding_box_.min_vertex.y(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/y_max", bounding_box_.max_vertex.y(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/z_min", bounding_box_.min_vertex.z(), 0.0);
+    nh_private_.param<float>("/evaluation_bounding_volume/z_max", bounding_box_.max_vertex.z(), 0.0);
 }
 
 bool VoxgraphNodeEvaluator::evaluate(std_srvs::Empty::Request &req,

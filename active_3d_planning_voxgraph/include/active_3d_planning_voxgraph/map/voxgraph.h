@@ -31,6 +31,8 @@ namespace active_3d_planning {
             // check collision for a single pose
             virtual bool isTraversable(const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation) override;
 
+            virtual bool isTraversable(const double& collision_radius, const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation);
+
             // check whether point is part of the map
             virtual bool isObserved(const Eigen::Vector3d &point) override;
 
@@ -62,6 +64,9 @@ namespace active_3d_planning {
             // get the stored weight
             double getCurrentNeighboursVoxelWeight(const Eigen::Vector3d &point);
 
+            // Check if a trajectory is traversable in the active submap
+            bool isTraversableClosePath(const EigenTrajectoryPointVector& trajectory);
+
             // check collision in all the submaps
             bool isTraversableInAllSubmaps(const Eigen::Vector3d &point);
 
@@ -81,9 +86,13 @@ namespace active_3d_planning {
 
             bool hasActiveMapFinished(bool update = true);
 
-            void publishActiveSubmap();
+            void publishPlannerActiveSubmap();
 
             void publishCurrentNeighbours();
+
+            void publishActiveSubmap(){
+                voxgraph_mapper_->publishActiveSubmap();
+            }
 
             voxgraph::VoxgraphSubmapCollection &getSubmapCollection() {
                 return voxgraph_mapper_->getSubmapCollection();
@@ -101,8 +110,8 @@ namespace active_3d_planning {
                 return voxgraph_mapper_->getRegistrationConstraint();
             }
 
-            const voxblox::Point getRobotPosition(){
-                return voxgraph_mapper_->getRobotPosition();
+            voxblox::Transformation get_T_M_O(){
+                return voxgraph_mapper_->getMapTracker().get_T_M_O();
             }
 
         protected:
@@ -126,6 +135,8 @@ namespace active_3d_planning {
             double c_maximum_weight_;
             double search_distance_;
             double search_step_;
+            double neighbourhood_distance_;
+            double global_plan_security_distance_;
             Eigen::Vector3d c_neighbor_robot_[6];
             bool tsdf_needed_;
         };

@@ -2653,6 +2653,12 @@
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/submap_exploration_planner_node.cpp">
 			<Option target="submap_exploration_planner_node"/>
 		</Unit>
+		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.cpp">
+			<Option target="active_3d_planning_app_submap_exploration"/>
+		</Unit>
+		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.h">
+			<Option target="active_3d_planning_app_submap_exploration"/>
+		</Unit>
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/voxgraph_local_planner_node.cpp">
 			<Option target="voxgraph_local_planner_node"/>
 		</Unit>

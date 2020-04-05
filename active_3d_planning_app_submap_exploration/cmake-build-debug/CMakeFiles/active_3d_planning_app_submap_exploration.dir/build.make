@@ -57,9 +57,22 @@ include CMakeFiles/active_3d_planning_app_submap_exploration.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o: ../src/tools/transformations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.cpp
+
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.cpp > CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.i
+
+CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.cpp -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.s
+
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o: ../src/module/trajectory_generator/rrt_star_voxgraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/trajectory_generator/rrt_star_voxgraph.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.i: cmake_force
@@ -72,7 +85,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_g
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o: ../src/module/sensor_model/iterative_ray_caster_voxgraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.i: cmake_force
@@ -85,7 +98,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o: ../src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.i: cmake_force
@@ -98,7 +111,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_e
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o: ../src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.i: cmake_force
@@ -111,7 +124,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_e
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o: ../src/module/global_point_selector/global_point_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_point_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.i: cmake_force
@@ -124,7 +137,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.o: ../src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/frontier.cpp.i: cmake_force
@@ -137,7 +150,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o: ../src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.i: cmake_force
@@ -150,7 +163,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.o: ../src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontier_evaluator.cpp.i: cmake_force
@@ -163,7 +176,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/global_frontier_selector.cpp.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/biggest_frontier_selector.cpp.i: cmake_force
@@ -189,7 +202,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_nearest_frontier_selector.cpp.i: cmake_force
@@ -202,7 +215,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/euclidean_normalized_frontier_selector.cpp.i: cmake_force
@@ -215,7 +228,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/nearest_frontier_selector.cpp.i: cmake_force
@@ -228,7 +241,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.o: ../src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/normalized_frontier_selector.cpp.i: cmake_force
@@ -241,7 +254,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o: ../src/planner/voxgraph_local_planner.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/planner/voxgraph_local_planner.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.i: cmake_force
@@ -254,7 +267,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_lo
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o: ../src/planner/submap_exploration_planner.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/planner/submap_exploration_planner.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.i: cmake_force
@@ -267,7 +280,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_expl
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o: CMakeFiles/active_3d_planning_app_submap_exploration.dir/flags.make
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o: ../src/planner/naive_voxgraph_exploration_planner.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o -c /home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/planner/naive_voxgraph_exploration_planner.cpp
 
 CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.i: cmake_force
@@ -280,6 +293,7 @@ CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgr
 
 # Object files for target active_3d_planning_app_submap_exploration
 active_3d_planning_app_submap_exploration_OBJECTS = \
+"CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o" \
 "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o" \
 "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o" \
 "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o" \
@@ -301,6 +315,7 @@ active_3d_planning_app_submap_exploration_OBJECTS = \
 # External object files for target active_3d_planning_app_submap_exploration
 active_3d_planning_app_submap_exploration_EXTERNAL_OBJECTS =
 
+devel/lib/libactive_3d_planning_app_submap_exploration.so: CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o
 devel/lib/libactive_3d_planning_app_submap_exploration.so: CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o
 devel/lib/libactive_3d_planning_app_submap_exploration.so: CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o
 devel/lib/libactive_3d_planning_app_submap_exploration.so: CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o
@@ -590,7 +605,7 @@ devel/lib/libactive_3d_planning_app_submap_exploration.so: /usr/lib/x86_64-linux
 devel/lib/libactive_3d_planning_app_submap_exploration.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 devel/lib/libactive_3d_planning_app_submap_exploration.so: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 devel/lib/libactive_3d_planning_app_submap_exploration.so: CMakeFiles/active_3d_planning_app_submap_exploration.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX shared library devel/lib/libactive_3d_planning_app_submap_exploration.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX shared library devel/lib/libactive_3d_planning_app_submap_exploration.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/active_3d_planning_app_submap_exploration.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

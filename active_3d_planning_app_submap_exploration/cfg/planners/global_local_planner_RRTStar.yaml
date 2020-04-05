@@ -19,6 +19,8 @@ map:
   tsdf_needed: "false"
   search_distance: 4
   search_step: 0.5
+  global_plan_security_distance: 1.0
+  neighbourhood_distance: 1.0
 
 system_constraints:
   v_max: 1.0

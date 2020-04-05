@@ -27,9 +27,11 @@
   
   <!--  Planner arguments-->
   <arg name="planner_config" default="planners/global_local_planner_RRTStar.yaml"/>
-  <arg name="min_gain_threshold" default="400.0"/>
-  <arg name="n_samples_threshold" default="70"/>
+  <arg name="min_gain_threshold" default="150.0"/>
+  <arg name="n_samples_threshold" default="40"/>
   <arg name="n_sample_tries_threshold" default="3000"/>
+  <arg name="global_replan_pos_threshold" default="1.5"/>
+  <arg name="global_replan_max_times" default="3"/>
   <arg name="frame_id" default="world" />
   <arg name="robot_radius" default="1.2"/>
   <arg name="truncation_distance" default="0.6"/>
@@ -49,7 +51,7 @@
   <rosparam command="load" file="$(find active_3d_planning_app_reconstruction)/cfg/experiments/$(arg experiment_config)"/> 
 
   <!--Voxgraph config -->
-  <rosparam command="load" file="$(find active_3d_planning_app_submap_exploration)/cfg/voxgraph/voxgraph_params.yaml"/> 
+  <rosparam command="load" file="$(find active_3d_planning_app_submap_exploration)/cfg/voxgraph/voxgraph_params_drift.yaml"/> 
 
   <!-- Setup empty gazebo world for physics-->
   <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models"/>
@@ -74,18 +76,18 @@
     
     <!-- MPC trajectory tracker (0.0021 sampling time needs to match odom publish rate!)-->
     <node name="mav_nonlinear_mpc" pkg="mav_nonlinear_mpc" type="nonlinear_mpc_node" respawn="true" clear_params="true">
-      <remap from="odometry" to="ground_truth/odometry" />
+      <remap from="odometry" to="simulated_odometry" />
       <rosparam file="$(find mav_nonlinear_mpc)/resources/nonlinear_mpc_$(arg mav_name).yaml" />
       <rosparam file="$(find mav_disturbance_observer)/resources/disturbance_observer_$(arg mav_name).yaml"/>
       <param name="use_rc_teleop" value="false"/>
       <param name="verbose" value="false" />
       <param name="reference_frame" value="world"/>
-      <param name="sampling_time" value="0.0021"/>
+      <param name="sampling_time" value="0.01"/>
     </node>
     
     <!-- Rotor input controller -->
-    <node name="PID_attitude_controller" pkg="mav_lowlevel_attitude_controller" type="mav_pid_attitude_controller_node" respawn="true" clear_params="true" >
-      <remap from="odometry" to="/planner/planner_node/odometry_without_imu_biases" />
+    <node name="PID_attitude_controller" pkg="mav_lowlevel_attitude_controller" type="mav_pid_attitude_controller_node" respawn="true" clear_params="true">
+      <remap from="odometry" to="simulated_odometry" />
       <rosparam file="$(find mav_lowlevel_attitude_controller)/resources/PID_attitude_$(arg mav_name).yaml" />
     </node>
     
@@ -96,7 +98,6 @@
       <remap from="cam0/image_raw" to="/unreal/unreal_sensor_model/ue_gray_image_out" />
       <remap from="imu0" to="ground_truth/imu" />
     </node>
-
     <node name="odometry_noise_model" pkg="active_3d_planning_app_reconstruction" type="gps_odometry_simulator.py" output="screen" unless="$(arg use_rovio)">
       <param name="position_uncertainty" value="0.05"/>
       <param name="roll_pitch_uncertainty" value="1.5" />
@@ -105,11 +106,11 @@
       <param name="publish_tf" value="true" />
       <remap from="odometry_in" to="ground_truth/odometry" />
     </node>
-
-    <!-- Drift simulation -->
-  <node name="odometry_simulator" pkg="voxgraph" type="odometry_simulator" output="screen">
-    <rosparam file="$(find active_3d_planning_app_submap_exploration)/cfg/voxgraph/odometry_simulator.yaml"/>
-  </node> 
+    
+    <!-- Odometry drift simulator -->
+    <node name="odometry_simulator" pkg="voxgraph" type="odometry_simulator" output="screen">
+       <rosparam file="$(find active_3d_planning_app_submap_exploration)/cfg/voxgraph/odometry_simulator.yaml"/>
+    </node>
 
     <!-- static camera transform -->
     <node pkg="tf" type="static_transform_publisher" name="tf_camera_to_link" args="0 0 0 -0.5 0.5 -0.5 0.5 /camera_link /camera 100"/>  
@@ -181,10 +182,13 @@
       <param name="n_samples_threshold" value="$(arg n_samples_threshold)" />
       <param name="n_sample_tries_threshold" value="$(arg n_sample_tries_threshold)" />
       <param name="tsdf_needed" value="false" />
+      <param name="global_replan_pos_threshold" value="$(arg global_replan_pos_threshold)" />
+      <param name="global_replan_max_times" value="$(arg global_replan_max_times)" />
 
     	<!-- General Settings -->
-      <remap from="odometry" to="/planner/planner_node/odometry_without_imu_biases" />
+      <remap from="odometry" to="/$(arg mav_name)/simulated_odometry" />
       <remap from="command/trajectory" to="/$(arg mav_name)/command/trajectory" />
+      <remap from="global_trajectory" to="mav_local_planner/full_trajectory" />
 	  <remap from="planner_node/plan" to="cblox_skeleton_planner/plan" />
 	  <remap from="planner_node/publish_path" to="cblox_skeleton_planner/publish_path" />
       <remap from="planner_node/path_length" to="cblox_skeleton_planner/path_length" />
@@ -198,11 +202,10 @@
           type="cblox_skeleton_server" output="screen"
           args="-alsologtostderr" clear_params="true" required="false">
       <remap from="tsdf_submap_in" to="planner_node/submap_esdfs" />
-      <!--remap from="esdf_submap_in" to="planner_node/submap_esdfs" /-->
       <remap from="submap_pose_in" to="planner_node/submap_poses" />
 	  <param name="verbose" value="false" />
       <param name="active_submap_service_topic"
-          value="/planner/planner_node/publish_active_submap1"/>    <!-- Why it must be wrong to work? -->
+          value="/planner/planner_node/publish_active_submap1"/>    <!--the name must be wrong if Voxgraph map is in the same node of the planner, otherwise deadlock!-->
 
       <param name="visualize" value="true"/>
       <param name="robot_radius" value= "1" /> <!--"$(arg robot_radius)"/-->
@@ -215,8 +218,10 @@
       <param name="grow_time" value="3"/>
       <param name="edge_density" value="1.5"/>
 
-      <param name="frame_id" value="$(arg frame_id)"/>
-      <param name="world_frame" value="$(arg frame_id)"/>
+      <param name="frame_id" value="mission"/> 
+      <param name="world_frame" value="mission"/> 
+      <param name="mission_frame" value="mission"/> 
+      <param name="odom_frame" value="world"/> 
 
       <param name="tsdf_voxel_size" value="$(arg voxel_size)" />
       <param name="tsdf_voxels_per_side" value="16" />
@@ -227,7 +232,7 @@
 	
 	<!-- Global trajectory smoother -->
     <node name="mav_local_planner" pkg="mav_local_planner" type="mav_local_planner_node" args="-alsologtostderr" output="screen" clear_params="true">
-      <remap from="odometry" to="/$(arg mav_name)/ground_truth/odometry" />
+      <remap from="odometry" to="/$(arg mav_name)/simulated_odometry" />
 	  <remap from="command/trajectory" to="/$(arg mav_name)/command/trajectory" />
 	  <param name="smoother_name" value="polynomial" />
       <param name="tsdf_voxel_size" value="$(arg voxel_size)" />
@@ -250,8 +255,8 @@
       <param name="robot_radius" value="$(arg robot_radius)" />
       <param name="planning_horizon_m" value="20.0" />
       <param name="verbose" value="true" />
-      <param name="v_max" value="2" />
-      <param name="a_max" value="1.5" />
+      <param name="v_max" value="2.5" />
+      <param name="a_max" value="1" />
       <param name="avoid_collisions" value="false" />
 
       <!-- What to do in case of failure. -->

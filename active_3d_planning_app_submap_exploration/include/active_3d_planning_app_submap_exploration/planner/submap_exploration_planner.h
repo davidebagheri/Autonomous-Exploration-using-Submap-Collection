@@ -33,6 +33,10 @@ namespace active_3d_planning{
 
             void advertiseServices();
 
+            void subscribeToTopics();
+
+            void currentTrajectoryCallback(const trajectory_msgs::MultiDOFJointTrajectory::Ptr& msg);
+
             bool globalPlanToPoint(const geometry_msgs::PoseStamped& goal_point);
 
             bool planToNearPoint(const geometry_msgs::PoseStamped& goal_point);
@@ -45,22 +49,26 @@ namespace active_3d_planning{
 
             void publishGlobalWaypoints();
 
-            bool arrivedToPoint(const geometry_msgs::PoseStamped& point);
+            bool arrivedToGlobalTrajEnd();
 
             void resetLocalPlanning();
 
             void resetGlobalPlanning();
 
-            bool globalTrajectoryCallback(std_srvs::SetBool::Request &req, std_srvs::SetBool::Response &res);
+            bool timeToRePlan();
 
-            // Ros Service Clients
+            // Ros Services
             ::ros::ServiceClient global_planning_cln_;
             ::ros::ServiceClient publish_global_trajectory_cln_;
             ::ros::ServiceServer publish_global_trajectory_srv_;
+            ::ros::Subscriber trajectory_sub_;
 
             // Variables
-            geometry_msgs::PoseStamped global_point_goal_;
-            geometry_msgs::PoseStamped global_point_planned_;
+            geometry_msgs::PoseStamped global_point_goal_O_;    // The first objective point that the planner tries to reach
+            geometry_msgs::PoseStamped global_point_planned_M_; // The point that the planner actually reaches in Mission frame
+            EigenTrajectoryPointVector planned_global_trajectory_;
+            int global_replan_current_times_;
+
             int n_current_tree_samples_;
             float current_tree_max_gain_;
 
@@ -68,7 +76,6 @@ namespace active_3d_planning{
             bool global_trajectory_planned_;
             bool global_point_computed_;
             bool global_plan_happened_;     // Whether a global plan happened in a voxgraph interval
-            bool global_trajectory_executed_;
 
             // Params
             float min_gain_threshold_;
@@ -76,10 +83,15 @@ namespace active_3d_planning{
             int n_samples_tries_threshold_;
             float global_replan_pos_threshold_;
             double nearest_submap_origin_max_distance_;
+            int global_replan_max_times_;
             double plan_time_limit_;
 
             // Global frontier selector
             std::unique_ptr<GlobalPointSelector> global_point_selector_;
+
+            // Time
+            ::ros::Time global_plan_time_;
+            //double global_plan_time_threshold_;
 
             // Param map
             Module::ParamMap *param_map_;

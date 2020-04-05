@@ -27,8 +27,8 @@
   
   <!--  Planner arguments-->
   <arg name="planner_config" default="planners/global_local_planner_RRTStar.yaml"/>
-  <arg name="min_gain_threshold" default="400.0"/>
-  <arg name="n_samples_threshold" default="70"/>
+  <arg name="min_gain_threshold" default="250.0"/>
+  <arg name="n_samples_threshold" default="5"/>
   <arg name="n_sample_tries_threshold" default="3000"/>
   <arg name="frame_id" default="world" />
   <arg name="robot_radius" default="1.2"/>
@@ -104,11 +104,6 @@
       <param name="publish_tf" value="true" />
       <remap from="odometry_in" to="ground_truth/odometry" />
     </node>
-
-    <!-- Drift simulation -->
-  <node name="odometry_simulator" pkg="voxgraph" type="odometry_simulator" output="screen">
-    <rosparam file="$(find active_3d_planning_app_submap_exploration)/cfg/voxgraph/odometry_simulator.yaml"/>
-  </node> 
 
     <!-- static camera transform -->
     <node pkg="tf" type="static_transform_publisher" name="tf_camera_to_link" args="0 0 0 -0.5 0.5 -0.5 0.5 /camera_link /camera 100"/>  
@@ -216,6 +211,8 @@
 
       <param name="frame_id" value="$(arg frame_id)"/>
       <param name="world_frame" value="$(arg frame_id)"/>
+      <param name="mission_frame" value="mission"/> 
+      <param name="odom_frame" value="world"/> 
 
       <param name="tsdf_voxel_size" value="$(arg voxel_size)" />
       <param name="tsdf_voxels_per_side" value="16" />

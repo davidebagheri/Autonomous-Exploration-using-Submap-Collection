@@ -84,15 +84,18 @@ namespace active_3d_planning {
         // bounding box
         std::unique_ptr<BoundingVolume> bounding_volume_;
 
+        // Submap frontier container
         std::map<SubmapID,SubmapFrontiers> submap_frontiers_map_;
 
+        // Transformation from Odom to Mission frame
+        Transformation T_M_O_ = voxblox::Transformation();
+
+        // Map
         map::VoxgraphMap* map_;
 
         // constants
         float c_voxel_size_;
-
         Point c_neighbor_voxels_[26];
-
         int n_frontier_points_threshold_;   // If the number of points in a frontier is below this number, it is erased
 
         // Ros publisher for visualization

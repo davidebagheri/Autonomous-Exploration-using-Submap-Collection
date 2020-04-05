@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+    <!-- Action -->
+    <arg name="eval_trajectory" default="true"/>
+
+    <!-- Bag file -->
     <arg name="bag_file" default="/media/davide/DATA/data/submap_exploration_planner/NoDrift/Maze/tmp_bags/tmp_bag_2020-03-06-17-44-44.bag"/>
+   
+    <!-- Trajectory computer -->
+    <arg name="data_file_name" default="/home/davide/Desktop/drift0_001.csv"/>
+    <arg name="evaluation_time_rate" default="0.05" />
 
-    <node name="player" pkg="rosbag" type="play" output="screen" args="-r 20.0 -s 0 $(arg bag_file)"/>
+<!--_______________________________ Nodes ___________________________________-->
 
-       <node name="distance_run_node" pkg="active_3d_planning_app_submap_exploration" type="distance_run_node" output="screen" />
+    <!-- Bag File Player -->
+    <node name="player" pkg="rosbag" type="play" output="screen" args="-r 20 -s 0 $(arg bag_file)"/>
 
+    <!-- Trajectory computer -->
+    <node name="odom_difference_evaluator" pkg="active_3d_planning_app_submap_exploration" type="odom_difference.py" output="screen" if="$(arg eval_trajectory)"> 
+    <param name="data_file_name" value="$(arg data_file_name)"/>
+    <param name="evaluation_time_rate" value="$(arg evaluation_time_rate)" />
+    </node>
 </launch>

@@ -14,7 +14,9 @@ namespace active_3d_planning {
     class PlannerMapManager {
     public:
 
-        PlannerMapManager(voxgraph::VoxgraphSubmapCollection* submap_collection_ptr,
+        PlannerMapManager(
+                voxgraph::VoxgraphSubmapCollection* submap_collection_ptr,
+                voxgraph::MapTracker* map_tracker_ptr,
                 std::list<voxgraph::RegistrationConstraint>* voxgraph_registration_constraint_ptr,
                 bool tsdf_needed,
                 voxgraph::VoxgraphSubmap::Config config)
@@ -24,6 +26,7 @@ namespace active_3d_planning {
             config_ = config;
             submap_collection_ptr_ = submap_collection_ptr;
             voxgraph_registration_constraint_ptr_ = voxgraph_registration_constraint_ptr;
+            map_tracker_ptr_ = map_tracker_ptr;
         }
 
         void updateActiveSubmap();
@@ -85,6 +88,7 @@ namespace active_3d_planning {
         // Voxgraph submap collection and registration constraints
         voxgraph::VoxgraphSubmapCollection* submap_collection_ptr_;
         std::list<voxgraph::RegistrationConstraint>* voxgraph_registration_constraint_ptr_;
+        voxgraph::MapTracker* map_tracker_ptr_;
 
         // Current neighbours blocks map
         std::map<SubmapID,BlockIndexList> current_neighbours_block_index_map_;

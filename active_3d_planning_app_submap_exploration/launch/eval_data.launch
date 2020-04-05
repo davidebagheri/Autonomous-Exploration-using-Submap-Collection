@@ -9,6 +9,8 @@
   <arg name="create_plots" default="true"/>
   <arg name="show_plots" default="false"/>
   <arg name="clear_voxblox_maps" default="false"/>	<!-- irreversible map removal (disk space)!-->
+ 
+  <arg name="unobservable_points_pct" default="0.0"/>
 
   <!-- Load map params -->
   <rosparam command="load" file="$(find active_3d_planning_app_reconstruction)/cfg/experiments/$(arg experiment_config)"/> 
@@ -29,5 +31,6 @@
     <param name="plot_global_traj_executed" value="$(arg plot_global_traj_executed)" />
     <param name="show_plots" value="$(arg show_plots)" />
     <param name="clear_voxblox_maps" value="$(arg clear_voxblox_maps)" />
+    <param name="unobservable_points_pct" value="$(arg unobservable_points_pct)"/>
   </node>
 </launch>

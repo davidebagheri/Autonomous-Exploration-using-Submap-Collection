@@ -105,7 +105,6 @@ namespace active_3d_planning {
 
     void SubmapFrontierEvaluator::wavefrontFrontierDetector(const Point& pose,
                                                             Layer<EsdfVoxel>& input_layer,
-                                                            //const Layer<EsdfVoxel>& frontier_check_layer,
                                                             std::vector<Frontier>* frontiers_vector){
         frontiers_vector->clear();
 
@@ -224,7 +223,8 @@ namespace active_3d_planning {
         getSubmapBlocksFromLayer(submap_id, *active_submap, &submap_layer);
 
         // Select an other point if the pose is not in the esdf layer
-        Point starting_point = map_->getRobotPosition();
+        Eigen::Vector3d starting_point_d = planner_.getCurrentPosition();
+        Point starting_point = Point(starting_point_d.x(), starting_point_d.y(), starting_point_d.z());
         if ((submap_layer.getVoxelPtrByCoordinates(starting_point) == nullptr) ||
             (submap_layer.getVoxelPtrByCoordinates(starting_point)->distance < 0)) {
             selectFirstFreeLayerPoint(submap_layer, &starting_point);
@@ -301,7 +301,7 @@ namespace active_3d_planning {
             // Get the voxel from mission frame to the submap frame
             T_S_M = submap_frontiers_map_[neigh_submap_id].getInversePose();
             const EsdfVoxel* voxel_ptr = map_->getSubmapCollection().getSubmap(neigh_submap_id).getEsdfMap().
-                    getEsdfLayer().getVoxelPtrByCoordinates(T_S_M * voxel);
+                    getEsdfLayer().getVoxelPtrByCoordinates(T_S_M * T_M_O_ * voxel);
 
             // Check if the frontier is still unobserved in all the possible submaps
             if ((voxel_ptr != nullptr) && (voxel_ptr->observed)) {
@@ -341,6 +341,7 @@ namespace active_3d_planning {
             ROS_WARN("The submap can not be transformed since it has not been registered yet");
         }
     }
+
     void SubmapFrontierEvaluator::updateSubmapFrontiers(){
         // Update the poses
         updateFrontiersPoses();
@@ -352,16 +353,20 @@ namespace active_3d_planning {
     void SubmapFrontierEvaluator::updateFrontiersPoses(){
         SubmapID submap_id;
         Transformation T_M_S2; // current submap pose
-        Transformation T_S2_S1; // transformation from the old submap pose to the new one
+        Transformation T_M_S1; // transformation from the old submap pose to the new one
+
+        Transformation T_M_O_new = map_->get_T_M_O();
+        Transformation T_M_O_old = T_M_O_;
 
         for (auto& submap_frontiers_pair : submap_frontiers_map_){
             submap_id = submap_frontiers_pair.first;
             T_M_S2 = map_->getSubmapCollection().getSubmap(submap_id).getPose();
-            T_S2_S1 = T_M_S2.inverse() * getSubmapFrontiersPose(submap_id);
+            T_M_S1 = getSubmapFrontiersPose(submap_id);
 
-            transformSubmapFrontiers(submap_id, T_S2_S1);
+            transformSubmapFrontiers(submap_id, T_M_O_new.inverse() * T_M_S2 * T_M_S1.inverse() * T_M_O_old);
             setSubmapFrontiersPose(submap_id, T_M_S2);
         }
+        T_M_O_ = T_M_O_new;
     }
 
     void SubmapFrontierEvaluator::updateFrontiersPoints(){

@@ -17,15 +17,7 @@ namespace active_3d_planning {
         bool VoxgraphExplorationPlanner::requestNextTrajectory() {
             // Force the Voxgraph mapper to compute the Active Submap Esdf
             naive_voxgraph_map_->updateActiveSubmap();
-            if (naive_voxgraph_map_->hasActiveMapFinished()){
-                /*std::ofstream fout;
-                fout.open("/home/davide/Desktop/naive_planner_analysis1.txt", std::ios::app );
-                if (!fout.is_open()) std::cout << "not open";
 
-                fout << "\n--------------------" << naive_voxgraph_map_->getVoxgraphMapper().getSubmapCollection().getActiveSubmapID() + 1
-                     << "------------------------\n";*/
-
-            }
             return RosPlanner::requestNextTrajectory();
         }
 

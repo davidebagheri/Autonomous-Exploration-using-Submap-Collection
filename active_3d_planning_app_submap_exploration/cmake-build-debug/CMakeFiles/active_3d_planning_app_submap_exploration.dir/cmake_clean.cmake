@@ -16,6 +16,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/naive_voxgraph_exploration_planner.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/submap_exploration_planner.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/planner/voxgraph_local_planner.cpp.o"
+  "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o"
   "devel/lib/libactive_3d_planning_app_submap_exploration.pdb"
   "devel/lib/libactive_3d_planning_app_submap_exploration.so"
 )

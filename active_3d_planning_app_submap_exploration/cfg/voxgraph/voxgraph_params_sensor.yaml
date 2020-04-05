@@ -1,0 +1,55 @@
+# Voxgraph mapper params
+planner:
+  planner_node:
+    verbose: false
+    submap_creation_interval: 30
+    pointcloud_topic: "/unreal/unreal_sensor_model/ue_sensor_out"
+    subscriber_queue_length: 1
+    input_odom_frame: "world"
+    input_base_link_frame: "firefly/odometry_sensor1"
+    output_mission_frame: "mission"
+    output_base_link_frame: "imu_voxgraph"
+    output_sensor_frame: "sensor_voxgraph"    
+    use_tf_transforms: true
+    odometry_input_topic: "/firefly/odometry_sensor1/odometry"
+    tsdf_integrator:
+      tsdf_voxel_size: 0.20
+      truncation_distance: 0.6
+      max_ray_length_m: 5.0
+      use_const_weight: true
+      use_weight_dropoff: true
+      use_sparsity_compensation_factor: true
+      sparsity_compensation_factor: 10.0
+      integration_order_mode: "sorted"
+    measurements:
+      submap_registration:
+          enabled: true
+          sampling_ratio: 0.05
+          registration_method: "explicit_to_implicit"
+          information_matrix:
+              x_x:     1.0
+              y_y:     1.0
+              z_z:     1.0
+              yaw_yaw: 1.0
+      odometry:
+          enabled: true
+          information_matrix:
+              x_x:     10.0
+              y_y:     10.0
+              z_z:     2500.0
+              yaw_yaw: 2500.0
+      height:
+          enabled: false
+          information_zz: 2500.0
+      loop_closure:
+          information_matrix:
+              x_x:     1.0
+              y_y:     1.0
+              z_z:     0.1
+              yaw_yaw: 0.0001
+    T_base_link_sensor:
+        - [0.0,  0.0, 1.0,  0.0]
+        - [-1.0,  0.0,  0.0, 0.0]
+        - [0.0,  -1.0, 0.0,  0.0]
+        - [0.0,  0.0, 0.0,  1.0]
+

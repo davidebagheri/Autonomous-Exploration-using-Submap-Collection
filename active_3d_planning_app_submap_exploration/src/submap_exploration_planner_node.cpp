@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv) {
     // leave some time for the rest to settle
-    //std::this_thread::sleep_for(std::chrono::seconds(3));
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 
     // init ros
     ros::init(argc, argv, "voxgraph_local_planner_node");

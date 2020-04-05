@@ -2619,6 +2619,33 @@ src/submap_exploration_planner_node.cpp.s:
 	$(MAKE) -f CMakeFiles/submap_exploration_planner_node.dir/build.make CMakeFiles/submap_exploration_planner_node.dir/src/submap_exploration_planner_node.cpp.s
 .PHONY : src/submap_exploration_planner_node.cpp.s
 
+src/tools/transformations.o: src/tools/transformations.cpp.o
+
+.PHONY : src/tools/transformations.o
+
+# target to build an object file
+src/tools/transformations.cpp.o:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.o
+.PHONY : src/tools/transformations.cpp.o
+
+src/tools/transformations.i: src/tools/transformations.cpp.i
+
+.PHONY : src/tools/transformations.i
+
+# target to preprocess a source file
+src/tools/transformations.cpp.i:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.i
+.PHONY : src/tools/transformations.cpp.i
+
+src/tools/transformations.s: src/tools/transformations.cpp.s
+
+.PHONY : src/tools/transformations.s
+
+# target to generate assembly for a file
+src/tools/transformations.cpp.s:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/tools/transformations.cpp.s
+.PHONY : src/tools/transformations.cpp.s
+
 src/voxgraph_local_planner_node.o: src/voxgraph_local_planner_node.cpp.o
 
 .PHONY : src/voxgraph_local_planner_node.o
@@ -2867,6 +2894,9 @@ help:
 	@echo "... src/submap_exploration_planner_node.o"
 	@echo "... src/submap_exploration_planner_node.i"
 	@echo "... src/submap_exploration_planner_node.s"
+	@echo "... src/tools/transformations.o"
+	@echo "... src/tools/transformations.i"
+	@echo "... src/tools/transformations.s"
 	@echo "... src/voxgraph_local_planner_node.o"
 	@echo "... src/voxgraph_local_planner_node.i"
 	@echo "... src/voxgraph_local_planner_node.s"

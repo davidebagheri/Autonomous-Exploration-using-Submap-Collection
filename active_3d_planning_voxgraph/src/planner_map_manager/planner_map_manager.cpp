@@ -49,11 +49,8 @@ namespace active_3d_planning {
                               &tsdf_updated_blocks_layer);
 
         // Transform the TSDF updated blocks layer in mission frame
-        /// Test
-        //ros::Time beg = ros::Time::now();
-        voxblox::transformLayer(tsdf_updated_blocks_layer, submap_collection_ptr_->getActiveSubmap().getPose(),
-                                &tsdf_transformed_updated_blocks_layer);
-        //ros::Time end = ros::Time::now();
+        voxblox::Transformation T_O_S = map_tracker_ptr_->get_T_M_O().inverse() * submap_collection_ptr_->getActiveSubmap().getPose();
+        voxblox::transformLayer(tsdf_updated_blocks_layer, T_O_S, &tsdf_transformed_updated_blocks_layer);
 
         // Update the active submap Tsdf
         copyTsdfLayerAInLayerBAndSetBlockID(tsdf_transformed_updated_blocks_layer,
@@ -62,8 +59,6 @@ namespace active_3d_planning {
 
         // Generate the updated Esdf
         active_submap_ptr_->updateEsdf();
-
-        //return (end-beg).toNSec() / 1000000;
     }
 
     void PlannerMapManager::removeSubmapFromActiveSubmap(const SubmapID& id){
@@ -136,7 +131,6 @@ namespace active_3d_planning {
     }
 
     void PlannerMapManager::updateCurrentNeighbours(const SubmapID& active_submap_id){
-        ros::Time beg = ros::Time::now();
         std::vector<SubmapID> IDs_to_add;
         std::vector<SubmapID> IDs_to_remove;
 
@@ -152,23 +146,31 @@ namespace active_3d_planning {
             erodeSubmapFromCurrentNeighbours(id_to_remove);
         }
 
-        // Add the submaps
-        for (auto id_to_add : IDs_to_add){
-            Layer<EsdfVoxel> esdf_layer_to_add(config_.esdf_voxel_size, config_.esdf_voxels_per_side);
-            voxblox::naiveTransformLayer(submap_collection_ptr_->getSubmap(id_to_add).getEsdfMap().getEsdfLayer(),
-                                         submap_collection_ptr_->getSubmap(id_to_add).getPose(),
-                                         &esdf_layer_to_add);
-            // Merge Esdf
-            addSubmapEsdfInCurrentNeighbours(esdf_layer_to_add, id_to_add);
+        if (IDs_to_add.size() != 0) {
+            voxblox::Transformation T_O_M =
+                    map_tracker_ptr_->get_T_M_O().inverse();
 
-            // Merge Tsdf
-            if (tsdf_needed_) {
-                Layer<TsdfVoxel> tsdf_layer_to_add(config_.tsdf_voxel_size, config_.tsdf_voxels_per_side);
-                voxblox::naiveTransformLayer(submap_collection_ptr_->getSubmap(id_to_add).getTsdfMap().getTsdfLayer(),
-                                             submap_collection_ptr_->getSubmap(id_to_add).getPose(),
-                                             &tsdf_layer_to_add);
-                mergeTsdfLayerAInLayerB(tsdf_layer_to_add,
-                                        current_neighbours_ptr_->getTsdfMapPtr()->getTsdfLayerPtr());
+            // Add the submaps
+            for (auto id_to_add : IDs_to_add) {
+                // Transform in odom frame
+                Layer<EsdfVoxel> esdf_layer_to_add(config_.esdf_voxel_size, config_.esdf_voxels_per_side);
+                voxblox::Transformation T_O_S = T_O_M * submap_collection_ptr_->getSubmap(id_to_add).getPose();
+                voxblox::naiveTransformLayer(submap_collection_ptr_->getSubmap(id_to_add).getEsdfMap().getEsdfLayer(),
+                                             T_O_S,
+                                             &esdf_layer_to_add);
+                // Merge Esdf
+                addSubmapEsdfInCurrentNeighbours(esdf_layer_to_add, id_to_add);
+
+                // Merge Tsdf
+                if (tsdf_needed_) {
+                    Layer<TsdfVoxel> tsdf_layer_to_add(config_.tsdf_voxel_size, config_.tsdf_voxels_per_side);
+                    voxblox::naiveTransformLayer(
+                            submap_collection_ptr_->getSubmap(id_to_add).getTsdfMap().getTsdfLayer(),
+                            submap_collection_ptr_->getSubmap(id_to_add).getPose(),
+                            &tsdf_layer_to_add);
+                    mergeTsdfLayerAInLayerB(tsdf_layer_to_add,
+                                            current_neighbours_ptr_->getTsdfMapPtr()->getTsdfLayerPtr());
+                }
             }
         }
 
