@@ -18,8 +18,7 @@ namespace active_3d_planning {
             setParam<bool>(param_map, "tsdf_needed", &tsdf_needed_, true);
             setParam<double>(param_map, "search_distance", &search_distance_, 3.0);
             setParam<double>(param_map, "search_step", &search_step_, 0.5);
-            setParam<double>(param_map, "neighbourhood_distance_", &neighbourhood_distance_, 3.0);
-            setParam<double>(param_map, "global_plan_security_distance", &global_plan_security_distance_, 0.4);
+            setParam<double>(param_map, "neighbourhood_distance_", &neighbourhood_distance_, 2.0);
 
             // Set istances of Voxgraph, the Planner Map Manager and the Frontiers Evaluator
             voxgraph_mapper_.reset(new voxgraph::VoxgraphMapper(nh, nh_private));
@@ -34,8 +33,6 @@ namespace active_3d_planning {
             std::string temp_args;
             std::string ns = (*param_map)["param_namespace"];
             setParam<std::string>(param_map, "bounding_volume_args", &temp_args,"/map_bounding_volume");
-            //bounding_box_ = planner_.getFactory().createModule<BoundingVolume>(temp_args, planner_, verbose_modules_);
-
 
             // Ros publishers
             pointcloud_tsdf_active_submap_pub_ = nh_private.advertise<pcl::PointCloud<pcl::PointXYZRGBA>>(
@@ -263,22 +260,10 @@ namespace active_3d_planning {
         }
 
         bool VoxgraphMap::isTraversableClosePath(const EigenTrajectoryPointVector& trajectory){
-            // default just checks every point
             for (const EigenTrajectoryPoint &point : trajectory) {
                 if ((point.position_W - planner_.getCurrentPosition()).norm() > neighbourhood_distance_) continue;
 
-                if (!isObserved(point.position_W)) continue;
-
-
-                double distance = 0.0;
-
-                if (planner_map_manager_->getActiveSubmapPtr()->getEsdfMapPtr()->getDistanceAtPosition(point.position_W, &distance)) {
-                    // This means the voxel is observed
-                    if ((distance<=1) and (distance > -0.2)){
-                        std::cout << "il punto che fa merda ha distanza " << distance << std::endl;
-                        return false;
-                    }
-                }
+                if (!isTraversable(point.position_W, point.orientation_W_B)) return false;
             }
             return true;
         }
@@ -310,8 +295,6 @@ namespace active_3d_planning {
                         voxblox::Point candidate_point_M = get_T_M_O() * voxblox::Point(candidate_point.x(), candidate_point.y(), candidate_point.z());
                         Eigen::Vector3d candidate_point_d_M(candidate_point_M.x(), candidate_point_M.y(), candidate_point_M.z());
                         if (isTraversableInAllSubmaps(candidate_point_d_M) && isInsideAllSubmaps(candidate_point_d_M)){
-                            if (candidate_point.z() < 1.3)
-                                free_points->emplace_back(candidate_point);
                             marker.color.r = 1;
                             marker.color.g = 0;
                             marker.color.b = 0;
@@ -418,5 +401,24 @@ namespace active_3d_planning {
                 pointcloud_esdf_current_neighbours_pub_.publish(esdf_pointcloud);
             }
         }
+
+        std::vector<SubmapID> VoxgraphMap::getSubmapsIncludingPoint(const Eigen::Vector3d& point){
+            std::vector<SubmapID> result;
+            voxblox::Point voxel_point(point.x(), point.y(), point.z());
+
+            for (auto submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()){
+                voxblox::Point voxel_point_S =
+                        voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getPose().inverse() * get_T_M_O() *
+                        voxel_point;
+                Eigen::Vector3d voxel_point_S_d(voxel_point_S.x(), voxel_point_S.y(), voxel_point_S.z());
+
+                if (voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getEsdfMap().isObserved(voxel_point_S_d)){
+                    result.push_back(submap_id);
+                }
+            }
+            return result;
+        }
+
+
     } // namespace map
 } // namespace active_3d_planning

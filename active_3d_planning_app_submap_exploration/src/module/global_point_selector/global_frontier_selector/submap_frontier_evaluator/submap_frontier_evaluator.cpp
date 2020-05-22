@@ -18,7 +18,7 @@ namespace active_3d_planning {
 
         std::string temp_args;
         std::string ns = (*param_map)["param_namespace"];
-        setParam<std::string>(param_map, "bounding_volume_args", &temp_args,"/map_bounding_volume");
+        setParam<std::string>(param_map, "bounding_volume_args", &temp_args,"/target_bounding_volume");
         bounding_volume_ = planner_.getFactory().createModule<BoundingVolume>(temp_args, planner_, verbose_modules_);
 
         // Publisher for visualization
@@ -169,7 +169,7 @@ namespace active_3d_planning {
                             if (input_layer.getVoxelPtrByCoordinates(w) == nullptr) continue;
 
                             if (!isFrontierOpenList(w, input_layer) || !isFrontierCloseList(w, input_layer) || !isMapCloseList(w, input_layer)){
-                                if (bounding_volume_->contains(Eigen::Vector3d(w.x(), w.y(),  w.z()))) {
+                                if (bounding_volume_->contains(Eigen::Vector3d(w.x(), w.y(),  w.z())) && w.z() < 1.1) {
                                     queue_f.emplace_back(w);
                                     setFrontierOpenList(w, input_layer);
                                 }
@@ -200,7 +200,7 @@ namespace active_3d_planning {
                     for (int j = 0; j < 6; j++) {
                         if (input_layer.getVoxelPtrByCoordinates(v + c_neighbor_voxels_[j]) == nullptr) continue;
                         if (input_layer.getVoxelPtrByCoordinates(v + c_neighbor_voxels_[j])->distance > 0) {
-                            if (bounding_volume_->contains(Eigen::Vector3d((double)v.x(), (double)v.y(), (double) v.z()))) {
+                            if (bounding_volume_->contains(Eigen::Vector3d((double)v.x(), (double)v.y(), (double) v.z()))&& v.z() < 1.1) {
                                 queue_m.emplace_back(v);
                                 setMapOpenList(v, input_layer);
                             }

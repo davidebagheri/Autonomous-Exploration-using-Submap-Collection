@@ -208,7 +208,7 @@
           value="/planner/planner_node/publish_active_submap1"/>    <!--the name must be wrong if Voxgraph map is in the same node of the planner, otherwise deadlock!-->
 
       <param name="visualize" value="true"/>
-      <param name="robot_radius" value= "1" /> <!--"$(arg robot_radius)"/-->
+      <param name="robot_radius" value="$(arg robot_radius)"/>
       <param name="do_smoothing" value="false"/>
       <param name="path_shortening" value="false"/>
       <param name="simplify solution" value="false"/>
@@ -256,7 +256,7 @@
       <param name="planning_horizon_m" value="20.0" />
       <param name="verbose" value="true" />
       <param name="v_max" value="2.5" />
-      <param name="a_max" value="1" />
+      <param name="a_max" value="2" />
       <param name="avoid_collisions" value="false" />
 
       <!-- What to do in case of failure. -->

@@ -18,7 +18,7 @@ namespace active_3d_planning {
 
             map::VoxgraphMap* map_;
 
-            bool computeGainFromVisibleVoxels(TrajectorySegment *traj_in) override;
+            virtual bool computeGainFromVisibleVoxels(TrajectorySegment *traj_in) override;
 
         };
     }

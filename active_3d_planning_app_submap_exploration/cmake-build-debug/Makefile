@@ -818,6 +818,19 @@ trajectory_msgs_generate_messages_cpp/fast:
 .PHONY : trajectory_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named filter_frontiers
+
+# Build rule for target.
+filter_frontiers: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 filter_frontiers
+.PHONY : filter_frontiers
+
+# fast build rule for target.
+filter_frontiers/fast:
+	$(MAKE) -f CMakeFiles/filter_frontiers.dir/build.make CMakeFiles/filter_frontiers.dir/build
+.PHONY : filter_frontiers/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -2079,6 +2092,33 @@ src/experiments/distance_run_node.cpp.s:
 	$(MAKE) -f CMakeFiles/distance_run_node.dir/build.make CMakeFiles/distance_run_node.dir/src/experiments/distance_run_node.cpp.s
 .PHONY : src/experiments/distance_run_node.cpp.s
 
+src/experiments/filter_frontiers.o: src/experiments/filter_frontiers.cpp.o
+
+.PHONY : src/experiments/filter_frontiers.o
+
+# target to build an object file
+src/experiments/filter_frontiers.cpp.o:
+	$(MAKE) -f CMakeFiles/filter_frontiers.dir/build.make CMakeFiles/filter_frontiers.dir/src/experiments/filter_frontiers.cpp.o
+.PHONY : src/experiments/filter_frontiers.cpp.o
+
+src/experiments/filter_frontiers.i: src/experiments/filter_frontiers.cpp.i
+
+.PHONY : src/experiments/filter_frontiers.i
+
+# target to preprocess a source file
+src/experiments/filter_frontiers.cpp.i:
+	$(MAKE) -f CMakeFiles/filter_frontiers.dir/build.make CMakeFiles/filter_frontiers.dir/src/experiments/filter_frontiers.cpp.i
+.PHONY : src/experiments/filter_frontiers.cpp.i
+
+src/experiments/filter_frontiers.s: src/experiments/filter_frontiers.cpp.s
+
+.PHONY : src/experiments/filter_frontiers.s
+
+# target to generate assembly for a file
+src/experiments/filter_frontiers.cpp.s:
+	$(MAKE) -f CMakeFiles/filter_frontiers.dir/build.make CMakeFiles/filter_frontiers.dir/src/experiments/filter_frontiers.cpp.s
+.PHONY : src/experiments/filter_frontiers.cpp.s
+
 src/experiments/voxgraph_node_evaluator.o: src/experiments/voxgraph_node_evaluator.cpp.o
 
 .PHONY : src/experiments/voxgraph_node_evaluator.o
@@ -2402,6 +2442,33 @@ src/module/sensor_model/iterative_ray_caster_voxgraph.s: src/module/sensor_model
 src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.s:
 	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.s
 .PHONY : src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.s
+
+src/module/trajectory_evaluator/loop_closure_evaluator.o: src/module/trajectory_evaluator/loop_closure_evaluator.cpp.o
+
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.o
+
+# target to build an object file
+src/module/trajectory_evaluator/loop_closure_evaluator.cpp.o:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/loop_closure_evaluator.cpp.o
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.cpp.o
+
+src/module/trajectory_evaluator/loop_closure_evaluator.i: src/module/trajectory_evaluator/loop_closure_evaluator.cpp.i
+
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.i
+
+# target to preprocess a source file
+src/module/trajectory_evaluator/loop_closure_evaluator.cpp.i:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/loop_closure_evaluator.cpp.i
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.cpp.i
+
+src/module/trajectory_evaluator/loop_closure_evaluator.s: src/module/trajectory_evaluator/loop_closure_evaluator.cpp.s
+
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.s
+
+# target to generate assembly for a file
+src/module/trajectory_evaluator/loop_closure_evaluator.cpp.s:
+	$(MAKE) -f CMakeFiles/active_3d_planning_app_submap_exploration.dir/build.make CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/loop_closure_evaluator.cpp.s
+.PHONY : src/module/trajectory_evaluator/loop_closure_evaluator.cpp.s
 
 src/module/trajectory_evaluator/naive_evaluator_voxgraph.o: src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o
 
@@ -2734,6 +2801,7 @@ help:
 	@echo "... trajectory_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... trajectory_msgs_generate_messages_cpp"
+	@echo "... filter_frontiers"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... std_srvs_generate_messages_lisp"
@@ -2834,6 +2902,9 @@ help:
 	@echo "... src/experiments/distance_run_node.o"
 	@echo "... src/experiments/distance_run_node.i"
 	@echo "... src/experiments/distance_run_node.s"
+	@echo "... src/experiments/filter_frontiers.o"
+	@echo "... src/experiments/filter_frontiers.i"
+	@echo "... src/experiments/filter_frontiers.s"
 	@echo "... src/experiments/voxgraph_node_evaluator.o"
 	@echo "... src/experiments/voxgraph_node_evaluator.i"
 	@echo "... src/experiments/voxgraph_node_evaluator.s"
@@ -2870,6 +2941,9 @@ help:
 	@echo "... src/module/sensor_model/iterative_ray_caster_voxgraph.o"
 	@echo "... src/module/sensor_model/iterative_ray_caster_voxgraph.i"
 	@echo "... src/module/sensor_model/iterative_ray_caster_voxgraph.s"
+	@echo "... src/module/trajectory_evaluator/loop_closure_evaluator.o"
+	@echo "... src/module/trajectory_evaluator/loop_closure_evaluator.i"
+	@echo "... src/module/trajectory_evaluator/loop_closure_evaluator.s"
 	@echo "... src/module/trajectory_evaluator/naive_evaluator_voxgraph.o"
 	@echo "... src/module/trajectory_evaluator/naive_evaluator_voxgraph.i"
 	@echo "... src/module/trajectory_evaluator/naive_evaluator_voxgraph.s"

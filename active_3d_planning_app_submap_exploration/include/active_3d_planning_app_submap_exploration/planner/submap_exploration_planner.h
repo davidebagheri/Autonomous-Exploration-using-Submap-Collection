@@ -55,7 +55,7 @@ namespace active_3d_planning{
 
             void resetGlobalPlanning();
 
-            bool timeToRePlan();
+            void stopRobot();
 
             // Ros Services
             ::ros::ServiceClient global_planning_cln_;

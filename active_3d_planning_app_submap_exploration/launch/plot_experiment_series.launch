@@ -1,6 +1,6 @@
 <launch>  
   <!-- Data source Data, -->
-  <arg name="target_directory" default="/media/davide/DATA/data/submap_exploration_planner/WithDrift/ConnectivityTraversableCheck" />
+  <arg name="target_directory" default="/media/davide/DATA/data/submap_exploration_planner/WithDrift/Drifts" />
 
   <!-- plotting is the main node, voxblox encapsulates c++ voxblox code -->
   <node name="eval_plotting_node" pkg="active_3d_planning_app_submap_exploration" type="plot_series.py" output="screen" required="true">

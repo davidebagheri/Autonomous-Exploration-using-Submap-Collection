@@ -9,11 +9,11 @@
       <config projectName="active_3d_planning_core" targetName="active_3d_planning_core" />
       <config projectName="active_3d_planning_core" targetName="active_3d_planning_core_package" />
       <config projectName="active_3d_planning_core" targetName="gmock" />
+      <config projectName="active_3d_planning_core" targetName="gmock_main" />
       <config projectName="active_3d_planning_core" targetName="tests" />
-      <config projectName="active_3d_planning_core" targetName="download_extra_data" />
       <config projectName="active_3d_planning_core" targetName="run_tests" />
       <config projectName="active_3d_planning_core" targetName="clean_test_results" />
-      <config projectName="active_3d_planning_core" targetName="gmock_main" />
+      <config projectName="active_3d_planning_core" targetName="download_extra_data" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -28,6 +28,9 @@
       <change afterPath="$PROJECT_DIR$/../active_3d_planning_voxgraph/src/planner_map_manager/planner_map_manager.cpp" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../active_3d_planning_voxgraph/src/planner_map_manager/tools/merge_layer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/experiments/Maze.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/experiments/Maze.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/experiments/experiment_visualization.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/experiments/experiment_visualization.rviz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/planners/reconstruction_planner.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/cfg/planners/reconstruction_planner.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/launch/evaluate_experiment.launch" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/launch/evaluate_experiment.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/launch/example.launch" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/launch/example.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/scripts/run_experiment_series.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/scripts/run_experiment_series.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/src/experiments/eval_data_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../active_3d_planning_app_reconstruction/src/experiments/eval_data_node.py" afterDir="false" />
@@ -158,7 +161,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../active_3d_planning_app_submap_exploration" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -343,6 +346,15 @@
       <workItem from="1585921031003" duration="591000" />
       <workItem from="1585933654010" duration="598000" />
       <workItem from="1585998142849" duration="659000" />
+      <workItem from="1586102217241" duration="589000" />
+      <workItem from="1586296147834" duration="9000" />
+      <workItem from="1586361417857" duration="2632000" />
+      <workItem from="1586382635260" duration="1260000" />
+      <workItem from="1586513508150" duration="599000" />
+      <workItem from="1586628679563" duration="147000" />
+      <workItem from="1588330259688" duration="781000" />
+      <workItem from="1588365099882" duration="610000" />
+      <workItem from="1588409997791" duration="16000" />
     </task>
     <servers />
   </component>

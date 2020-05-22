@@ -2,7 +2,7 @@
 planner:
   planner_node:
     verbose: false
-    submap_creation_interval: 15
+    submap_creation_interval: 20
     pointcloud_topic: "/unreal/unreal_sensor_model/ue_sensor_out"
     subscriber_queue_length: 1
     input_odom_frame: "world"

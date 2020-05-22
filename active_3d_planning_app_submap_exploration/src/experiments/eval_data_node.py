@@ -43,8 +43,10 @@ class EvalData:
 
             self.ns_voxgraph = rospy.get_param('~ns_voxgraph', "/planner/planner_node")
             self.eval_global_plan_frequency = rospy.get_param('~eval_global_plan_frequency', False)
+            self.eval_ground_truth_map = rospy.get_param('~eval_ground_truth_map', False)
+            self.ns_voxblox = rospy.get_param('~ns_voxblox', "/voxblox_node")
 
-            # Statistics
+        # Statistics
             self.eval_n_maps = 0
             self.eval_n_pointclouds = 0
 
@@ -55,6 +57,7 @@ class EvalData:
             os.mkdir(self.eval_directory)
             rospy.set_param(self.ns_planner + "/performance_log_dir", self.eval_directory)
             os.mkdir(os.path.join(self.eval_directory, "voxgraph_collections"))
+            os.mkdir(os.path.join(self.eval_directory, "voxblox_collections"))
             self.eval_data_file = open(os.path.join(self.eval_directory, "voxblox_data.csv"), 'wb')		# no need 
             self.eval_writer = csv.writer(self.eval_data_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL,  # no need 
                                       lineterminator='\n')												# no need 
@@ -77,6 +80,7 @@ class EvalData:
             self.writelog("Data folder created at '%s'." % self.eval_directory)
             rospy.loginfo("Data folder created at '%s'." % self.eval_directory)
             self.eval_voxblox_service = rospy.ServiceProxy(self.ns_voxgraph + "/save_to_file", FilePath)
+            self.eval_ground_truth_service = rospy.ServiceProxy(self.ns_voxblox + "/save_map", FilePath)
             rospy.on_shutdown(self.eval_finish)
             self.collided = False
 
@@ -165,6 +169,10 @@ class EvalData:
             else:
                 self.eval_writer.writerow([voxgraph_collection_name, time_ros, time_real, self.eval_n_pointclouds, float(cpu.message)])
             self.eval_voxblox_service(os.path.join(self.eval_directory, "voxgraph_collections", voxgraph_collection_name + ".vxgrp"))
+            
+            if self.eval_ground_truth_map:
+                self.eval_ground_truth_service(os.path.join(self.eval_directory, "voxblox_collections", voxgraph_collection_name + ".vxblx"))
+
             self.eval_n_pointclouds = 0
             self.eval_n_maps += 1
 

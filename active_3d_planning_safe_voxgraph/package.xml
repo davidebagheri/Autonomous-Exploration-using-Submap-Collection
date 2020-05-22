@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>active_3d_planning_safe_voxgraph</name>
+    <version>0.0.0</version>
+    <description>Voxgraph as map representation</description>
+
+    <author email="davide.bagheri@gmail.com">Davide Bagheri</author>
+
+    <maintainer email="davide.bagheri@gmail.com">Davide Bagheri</maintainer>
+
+    <license>BSD</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <buildtool_depend>catkin_simple</buildtool_depend>
+
+    <depend>active_3d_planning_voxgraph</depend>
+
+</package>

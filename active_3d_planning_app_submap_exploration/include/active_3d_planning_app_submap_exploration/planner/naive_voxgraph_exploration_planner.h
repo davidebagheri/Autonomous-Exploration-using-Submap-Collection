@@ -18,9 +18,6 @@ namespace active_3d_planning {
 
         protected:
             map::NaiveVoxgraphMap* naive_voxgraph_map_;
-
-            ///Test
-            double getNumSamples();
         };
     }
 }

@@ -14,8 +14,10 @@ namespace active_3d_planning {
             ros::NodeHandle nh("");
             ros::NodeHandle nh_private("~");
 
-            // Set istances of Voxgraph, the Planner Map Manager and the Frontiers Evaluator
+            // Set istances of Voxgraph and initialize T_M_O
             voxgraph_mapper_.reset(new voxgraph::VoxgraphMapper(nh, nh_private));
+            T_M_O_ = voxblox::Transformation();
+
             // cache constants
             c_voxel_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size;
             c_block_size_ = voxgraph_mapper_->getSubmapConfig().esdf_voxel_size *
@@ -26,10 +28,9 @@ namespace active_3d_planning {
 
 
         bool NaiveVoxgraphMap::isTraversable(const Eigen::Vector3d &position, const Eigen::Quaterniond &orientation) {
-            return false;
             double distance = 0.0;
 
-            voxblox::Point voxel_position(position.x(), position.y(), position.z());
+            voxblox::Point voxel_position = T_M_O_ * voxblox::Point(position.x(), position.y(), position.z());
 
             for (const auto& submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()){
                 voxblox::Point voxel_position_S = voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getInversePose() * voxel_position;
@@ -45,12 +46,11 @@ namespace active_3d_planning {
         }
 
         bool NaiveVoxgraphMap::isObserved(const Eigen::Vector3d &point) {
-            return false;
             if (voxgraph_mapper_->getSubmapCollection().empty()) {
                 return false;
             };
 
-            voxblox::Point voxel_position(point.x(), point.y(), point.z());
+            voxblox::Point voxel_position = T_M_O_ * voxblox::Point(point.x(), point.y(), point.z());
             for (const auto& submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()) {
                 voxblox::Point voxel_point_S = voxgraph_mapper_->getSubmapCollection().getSubmap(submap_id).getInversePose() * voxel_position;
                 Eigen::Vector3d point_S = Eigen::Vector3d(voxel_point_S.x(), voxel_point_S.y(), voxel_point_S.z());
@@ -63,7 +63,7 @@ namespace active_3d_planning {
 
         // get occupancy
         unsigned char NaiveVoxgraphMap::getVoxelState(const Eigen::Vector3d &point) {
-            voxblox::Point voxel_position(point.x(), point.y(), point.z());
+            voxblox::Point voxel_position = T_M_O_ * voxblox::Point(point.x(), point.y(), point.z());
 
             double distance = 0.0;
             bool free = false;
@@ -100,7 +100,7 @@ namespace active_3d_planning {
 
         // get the stored TSDF distance
         double NaiveVoxgraphMap::getVoxelDistance(const Eigen::Vector3d &point) {
-            voxblox::Point voxel_position(point.x(), point.y(), point.z());
+            voxblox::Point voxel_position = T_M_O_ * voxblox::Point(point.x(), point.y(), point.z());
             float distance = INFINITY;
 
             for (const auto& submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()) {
@@ -123,7 +123,7 @@ namespace active_3d_planning {
 
         // get the stored weight as the sum of the weights in all the submap
         double NaiveVoxgraphMap::getVoxelWeight(const Eigen::Vector3d &point) {
-            voxblox::Point voxel_position(point.x(), point.y(), point.z());
+            voxblox::Point voxel_position = T_M_O_ * voxblox::Point(point.x(), point.y(), point.z());
             double weight = 0.0;
 
             for (const auto& submap_id : voxgraph_mapper_->getSubmapCollection().getIDs()) {
@@ -150,6 +150,10 @@ namespace active_3d_planning {
         void NaiveVoxgraphMap::updateActiveSubmap(){
             // Update Esdf
             voxgraph_mapper_->getSubmapCollection().getActiveSubmapPtr()->updateEsdf();
+
+            if (hasActiveMapFinished()){
+                T_M_O_ = voxgraph_mapper_->getMapTracker().get_T_M_O();
+            }
         }
 
         bool NaiveVoxgraphMap::hasActiveMapFinished(){
@@ -161,10 +165,7 @@ namespace active_3d_planning {
                     return true;
                 }
             }
-            ROS_WARN("IS hasActiveMapFinished fine");
             return false;
         }
-
-
     }
 }

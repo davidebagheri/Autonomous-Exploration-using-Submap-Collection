@@ -10,6 +10,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_frontier_selector/submap_frontier_evaluator/submap_frontiers.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/global_point_selector/global_point_selector.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp.o"
+  "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/loop_closure_evaluator.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp.o"
   "CMakeFiles/active_3d_planning_app_submap_exploration.dir/src/module/trajectory_generator/rrt_star_voxgraph.cpp.o"

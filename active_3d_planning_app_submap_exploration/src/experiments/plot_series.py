@@ -20,13 +20,13 @@ class EvalPlotting:
 
         # Evaluate        
         planners_subdirs = [os.path.join(target_dir, o) for o in os.listdir(target_dir)]
-        
+        plt.rcParams.update({'font.size': 15})
+    
         plt.figure()
         for subdir in planners_subdirs:
             planner_name = self.get_planner_name(os.path.split(subdir)[1])
-            #self.compute_series(os.path.join(subdir, "NoDrift/Maze"), planner_name)
             self.compute_series(subdir, planner_name)
-            
+        
         save_name = os.path.join(target_dir, "SeriesOverview.png")
         plt.legend()
         plt.savefig(save_name, dpi=300, format='png', bbox_inches='tight')
@@ -34,11 +34,11 @@ class EvalPlotting:
         
     def get_planner_name(self, planner_dir):
         if (planner_dir == "naive_voxgraph_planner"): 
-            return "Naive Voxgraph Planner"
+            return "Submap-based RRT* RH-NBV [8]"
         if (planner_dir == "safe_submap_exploration_planner"): 
             return "Safe Submap Exploration Planner"
         if (planner_dir == "submap_exploration_planner"): 
-            return "Submap Exploration Planner"
+            return "Ours"
         if (planner_dir == "voxgraph_local_planner"): 
             return "Voxgraph Local Planner"
         else:
@@ -164,37 +164,49 @@ class EvalPlotting:
 		# Compensate unobservable voxels
         if np.max(means['UnknownVoxels']) > 0:
             unknown = means['UnknownVoxels'] 
-            unknown = np.maximum(unknown, np.zeros_like(unknown))
+            std_devs['UnknownVoxels'] = std_devs['UnknownVoxels'] * 100
+            unknown = np.maximum(unknown, np.zeros_like(unknown)) * 100
             if (planner_name == "Normalized Frontier"):
-
                 plt.plot(x, unknown, '-g',label = planner_name)
                 plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
 				                    unknown + std_devs['UnknownVoxels'],
                                     color = 'g',
 				                    alpha=.2)
+            elif (planner_name == "Biggest Frontier"):
+                plt.plot(x, unknown, color='orange',label = planner_name)
+                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
+				 #                   unknown + std_devs['UnknownVoxels'],
+                  #                  color = 'orange', 
+				   #                 alpha=.2)
+            elif (planner_name == "Nearest Frontier"):
+                plt.plot(x, unknown, color='blue',label = planner_name)
+                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
+				 #                   unknown + std_devs['UnknownVoxels'],
+                  #                  color = 'blue', 
+				   #                 alpha=.2)
             elif (planner_name == "Euclidean Normalized Frontier"):
                 plt.plot(x, unknown, '-r',label = planner_name)
                 plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
 				                    unknown + std_devs['UnknownVoxels'],
                                     color = 'r', 
 				                    alpha=.2)
-            elif (planner_name == "Biggest Frontier"):
-                plt.plot(x, unknown, color='orange',label = planner_name)
+            elif (planner_name == "Euclidean Nearest Frontier"):
+                plt.plot(x, unknown, '-r',label = planner_name)
                 plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
 				                    unknown + std_devs['UnknownVoxels'],
-                                    color = 'orange', 
+                                    color = 'r', 
 				                    alpha=.2)
             
             else: 
                 plt.plot(x, unknown, label = planner_name)
-                plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-    				                    unknown + std_devs['UnknownVoxels'],
-    				                    alpha=.2)
-            plt.plot([x[i] for i in early_stops], [means['UnknownVoxels'][i] for i in early_stops], 'kx',
+                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
+    			#	                    unknown + std_devs['UnknownVoxels'],
+    			#	                    alpha=.2)
+            plt.plot([x[i] for i in early_stops], [means['UnknownVoxelsGroundTruth'][i] for i in early_stops], 'kx',
 				            markersize=9, markeredgewidth=2)
             plt.ylabel('Unknown Voxels [%]')
             plt.xlabel('Time [min]')
-            plt.ylim(0, 1)
+            plt.ylim(0, 100)
         
         plt.xlim(left=0, right=x[-1])
         
@@ -215,7 +227,7 @@ class EvalPlotting:
         with open(file_name) as infile:
             reader = csv.reader(infile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             for row in reader:
-                if row[0] == 'MapName':
+                if row[0] == 'MapName' or row[0] == "RosTimeM":
                     headers = row
                     for header in headers:
                         data_voxblox[header] = []

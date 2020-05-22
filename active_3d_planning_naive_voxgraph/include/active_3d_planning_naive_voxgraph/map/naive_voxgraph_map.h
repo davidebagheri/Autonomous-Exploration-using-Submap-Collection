@@ -59,6 +59,9 @@ namespace active_3d_planning {
             double c_voxel_size_;
             double c_block_size_;
             double c_maximum_weight_;
+
+            // Mission to Odom transform
+            voxblox::Transformation T_M_O_;
         };
     }
 }

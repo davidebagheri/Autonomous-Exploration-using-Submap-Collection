@@ -1297,6 +1297,162 @@
 					<DistClean command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="filter_frontiers">
+				<Option output="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration/filter_frontiers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;active_3d_planning_app_submap_exploration&quot;"/>
+					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/include"/>
+					<Add directory="/home/davide/catkin_ws/devel/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_core/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/eigen_checks/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_comm/mav_msgs/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_comm/mav_planning_msgs/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_visualization/include"/>
+					<Add directory="/home/davide/catkin_ws/src/minkindr/minkindr/include"/>
+					<Add directory="/home/davide/catkin_ws/src/minkindr_ros/minkindr_conversions/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox_rviz_plugin/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/cblox/cblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/cblox/cblox_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_planning_voxblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/voxblox_skeleton/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph/voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_naive_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_safe_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_trajectory_generation/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/loco_planner/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_planning_common/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_trajectory_generation_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_mav/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_path_smoothing/include"/>
+					<Add directory="/home/davide/catkin_ws/src/asldoc-2019-ma-gasserl/cblox_planning/include"/>
+					<Add directory="/opt/ros/melodic/include"/>
+					<Add directory="/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
+					<Add directory="/opt/ros/melodic/share/orocos_kdl/cmake/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/davide/catkin_ws/build/voxblox"/>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/usr/include/pcl-1.8"/>
+					<Add directory="/usr/include/ni"/>
+					<Add directory="/usr/include/openni2"/>
+					<Add directory="/usr/include/vtk-6.3"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent/include"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include"/>
+					<Add directory="/usr/include/python2.7"/>
+					<Add directory="/usr/include/hdf5/openmpi"/>
+					<Add directory="/usr/include/libxml2"/>
+					<Add directory="/usr/include/jsoncpp"/>
+					<Add directory="/usr/include/tcl"/>
+					<Add directory="/usr/include/OGRE/Overlay"/>
+					<Add directory="/usr/include/OGRE"/>
+					<Add directory="/home/davide/catkin_ws/build/cblox"/>
+					<Add directory="/home/davide/catkin_ws/build/voxblox_skeleton"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 filter_frontiers"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="filter_frontiers/fast">
+				<Option output="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration/filter_frontiers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DROS_BUILD_SHARED_LIBS=1"/>
+					<Add option="-DROS_PACKAGE_NAME=&quot;active_3d_planning_app_submap_exploration&quot;"/>
+					<Add option="-DROSCONSOLE_BACKEND_LOG4CXX"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/include"/>
+					<Add directory="/home/davide/catkin_ws/devel/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_core/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/eigen_checks/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_comm/mav_msgs/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_comm/mav_planning_msgs/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_visualization/include"/>
+					<Add directory="/home/davide/catkin_ws/src/minkindr/minkindr/include"/>
+					<Add directory="/home/davide/catkin_ws/src/minkindr_ros/minkindr_conversions/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox_rviz_plugin/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxblox/voxblox_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/cblox/cblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/cblox/cblox_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_planning_voxblox/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/voxblox_skeleton/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph/voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_naive_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_safe_voxgraph/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_trajectory_generation/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/loco_planner/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_planning_common/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_trajectory_generation/mav_trajectory_generation_ros/include"/>
+					<Add directory="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_mav/include"/>
+					<Add directory="/home/davide/catkin_ws/src/mav_voxblox_planning/mav_path_smoothing/include"/>
+					<Add directory="/home/davide/catkin_ws/src/asldoc-2019-ma-gasserl/cblox_planning/include"/>
+					<Add directory="/opt/ros/melodic/include"/>
+					<Add directory="/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"/>
+					<Add directory="/opt/ros/melodic/share/orocos_kdl/cmake/../../../include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/davide/catkin_ws/build/voxblox"/>
+					<Add directory="/usr/include/opencv"/>
+					<Add directory="/usr/include/pcl-1.8"/>
+					<Add directory="/usr/include/ni"/>
+					<Add directory="/usr/include/openni2"/>
+					<Add directory="/usr/include/vtk-6.3"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent/include"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/openmpi/include"/>
+					<Add directory="/usr/include/python2.7"/>
+					<Add directory="/usr/include/hdf5/openmpi"/>
+					<Add directory="/usr/include/libxml2"/>
+					<Add directory="/usr/include/jsoncpp"/>
+					<Add directory="/usr/include/tcl"/>
+					<Add directory="/usr/include/OGRE/Overlay"/>
+					<Add directory="/usr/include/OGRE"/>
+					<Add directory="/home/davide/catkin_ws/build/cblox"/>
+					<Add directory="/home/davide/catkin_ws/build/voxblox_skeleton"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 filter_frontiers/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="std_msgs_generate_messages_nodejs">
 				<Option working_dir="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug"/>
 				<Option type="4"/>
@@ -2593,6 +2749,9 @@
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/experiments/distance_run_node.cpp">
 			<Option target="distance_run_node"/>
 		</Unit>
+		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/experiments/filter_frontiers.cpp">
+			<Option target="filter_frontiers"/>
+		</Unit>
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/experiments/voxgraph_node_evaluator.cpp">
 			<Option target="voxgraph_node_evaluator"/>
 		</Unit>
@@ -2629,6 +2788,9 @@
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/sensor_model/iterative_ray_caster_voxgraph.cpp">
 			<Option target="active_3d_planning_app_submap_exploration"/>
 		</Unit>
+		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/trajectory_evaluator/loop_closure_evaluator.cpp">
+			<Option target="active_3d_planning_app_submap_exploration"/>
+		</Unit>
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp">
 			<Option target="active_3d_planning_app_submap_exploration"/>
 		</Unit>
@@ -2654,9 +2816,6 @@
 			<Option target="submap_exploration_planner_node"/>
 		</Unit>
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.cpp">
-			<Option target="active_3d_planning_app_submap_exploration"/>
-		</Unit>
-		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/tools/transformations.h">
 			<Option target="active_3d_planning_app_submap_exploration"/>
 		</Unit>
 		<Unit filename="/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/src/voxgraph_local_planner_node.cpp">

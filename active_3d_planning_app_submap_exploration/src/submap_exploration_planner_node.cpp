@@ -14,6 +14,9 @@ int main(int argc, char **argv) {
     // leave some time for the rest to settle
     std::this_thread::sleep_for(std::chrono::seconds(3));
 
+    // Initialize random seed
+    srand (time(NULL));
+
     // init ros
     ros::init(argc, argv, "voxgraph_local_planner_node");
 

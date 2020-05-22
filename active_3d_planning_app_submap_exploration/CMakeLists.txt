@@ -22,6 +22,7 @@ cs_add_library(${PROJECT_NAME}
         src/module/sensor_model/iterative_ray_caster_voxgraph.cpp
         src/module/trajectory_evaluator/naive_evaluator_voxgraph.cpp
         src/module/trajectory_evaluator/voxel_weight_evaluator_voxgraph.cpp
+        src/module/trajectory_evaluator/loop_closure_evaluator.cpp
         # Global point selector
         src/module/global_point_selector/global_point_selector.cpp
         # Frontier selector
@@ -67,7 +68,6 @@ cs_add_executable(distance_run_node
         src/experiments/distance_run_node.cpp
         )
 target_link_libraries(distance_run_node ${catkin_LIBRARIES} ${PROJECT_NAME})
-
 
 cs_install()
 cs_export()

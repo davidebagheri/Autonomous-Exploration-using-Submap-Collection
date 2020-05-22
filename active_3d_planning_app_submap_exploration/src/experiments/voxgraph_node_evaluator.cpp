@@ -4,6 +4,7 @@
 #include "pcl/point_cloud.h"
 #include "voxblox_ros/ptcloud_vis.h"
 #include "active_3d_planning_voxgraph/planner_map_manager/tools/merge_layer.h"
+#include "voxblox_ros/esdf_server.h"
 
 namespace cblox {
     template<>
@@ -34,6 +35,7 @@ private:
     ros::Publisher good_pointcloud_pub_;
 
     cblox::SubmapServer<cblox::TsdfEsdfSubmap> submap_server_;
+
     voxblox::BoundingBox bounding_box_;
 
     // params
@@ -42,6 +44,7 @@ private:
     std::ofstream log_file_;
 
     bool p_evaluate_;
+    bool p_evaluate_ground_truth_;
 };
 
 VoxgraphNodeEvaluator::VoxgraphNodeEvaluator(const ros::NodeHandle &nh, const ros::NodeHandle &nh_private) :
@@ -79,6 +82,7 @@ bool VoxgraphNodeEvaluator::evaluate(std_srvs::Empty::Request &req,
 
     // Get action to perform
     nh_private_.param("evaluate", p_evaluate_, true);
+    nh_private_.param("evaluate_ground_truth", p_evaluate_ground_truth_, true);
 
     // Check not previously evaluated
     std::string line;
@@ -152,9 +156,9 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
     pcl::PointCloud<pcl::PointXYZI> good_pointcloud;
 
     if (map_name == "Header") {
-        return "UnknownVoxels";
+        return "UnknownVoxels,UnknownVoxelsGroundTruth";
     } else if (map_name == "Unit") {
-        return "percent";
+        return "percent,percent";
     }
 
     int observed_voxels = 0;
@@ -202,7 +206,7 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
             marker.scale.x = (bounding_box_.max_vertex.x() - bounding_box_.min_vertex.x());
             marker.scale.y = (bounding_box_.max_vertex.y() - bounding_box_.min_vertex.y());
             marker.scale.z = (bounding_box_.max_vertex.z() - bounding_box_.min_vertex.z());
-            marker.color.a = 0.5; // Don't forget to set the alpha!
+            marker.color.a = 0.5;
             marker.color.r = 1.0;
             marker.color.g = 1.0;
             marker.color.b = 1.0;
@@ -235,8 +239,43 @@ std::string VoxgraphNodeEvaluator::evaluateSingle(std::string map_name) {
     std::ostringstream result("");
     result << unknown_voxels_pct;
 
+    // Load Map ground truth
+    if (p_evaluate_ground_truth_) {
+        std::shared_ptr<voxblox::Layer<voxblox::TsdfVoxel>> tsdf_layer;
+        voxblox::Interpolator<voxblox::TsdfVoxel>::Ptr interpolator;
+        voxblox::io::LoadLayer<voxblox::TsdfVoxel>(
+                p_target_dir_ + "/voxblox_collections/" + map_name + ".vxblx", &tsdf_layer);
+        interpolator.reset(
+                new voxblox::Interpolator<voxblox::TsdfVoxel>(tsdf_layer.get()));
+
+        int ground_truth_observed = 0;
+
+        voxblox::BlockIndexList block_idx_list;
+        tsdf_layer->getAllAllocatedBlocks(&block_idx_list);
+
+        for (const voxblox::BlockIndex &block_idx : block_idx_list) {
+            typename voxblox::Block<voxblox::TsdfVoxel>::ConstPtr block = tsdf_layer->getBlockPtrByIndex(block_idx);
+
+            // Iterate over all the voxels in the layer
+            for (voxblox::IndexElement voxel_idx = 0;
+                 voxel_idx < static_cast<voxblox::IndexElement>(block->num_voxels()); ++voxel_idx) {
+                // Bounding box check
+                voxblox::Point voxel_coords = block->computeCoordinatesFromLinearIndex(voxel_idx);
+                if (!bounding_box_.contains(voxel_coords)) continue;
+
+                if (block->getVoxelByLinearIndex(voxel_idx).weight > 0) {
+                    ground_truth_observed++;
+                }
+            }
+        }
+        std::cout << "oh grande, ci sono n voxel " << ground_truth_observed << std::endl;
+        float unknown_voxels_ground_truth_pct = 1.0 - ((float) ground_truth_observed) / (map_volume / voxel_volume);
+
+        result << "," << unknown_voxels_ground_truth_pct;
+    }
+
     return result.str();
-}
+    }
 }
 
 int main(int argc, char **argv) {

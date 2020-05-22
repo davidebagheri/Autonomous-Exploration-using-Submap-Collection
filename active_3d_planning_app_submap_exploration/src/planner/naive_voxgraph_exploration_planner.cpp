@@ -20,28 +20,5 @@ namespace active_3d_planning {
 
             return RosPlanner::requestNextTrajectory();
         }
-
-        double VoxgraphExplorationPlanner::getNumSamples(){
-            std::vector<TrajectorySegment *> children;
-            TrajectorySegment* child;
-
-            // Initialize the queue
-            children.push_back(current_segment_.get());
-
-            // Reinitialize the counts
-            int n_current_tree_samples = 0;
-            while (!children.empty()){
-                // Pop the first element
-                child = children[0];
-                children.erase(children.begin());
-
-                // Update the counts
-                n_current_tree_samples++;
-
-                // Enqueue the children
-                child->getChildren(&children);
-            }
-            return n_current_tree_samples;
-        }
     }
 }

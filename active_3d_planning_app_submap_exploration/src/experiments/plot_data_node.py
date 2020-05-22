@@ -27,6 +27,7 @@ class EvalPlotting:
         target_dir = rospy.get_param('~target_directory')
         self.ns_voxgraph = rospy.get_param('~ns_eval_voxgraph_node', '/voxgraph_node_evaluator')
         self.evaluate = rospy.get_param('~evaluate', True)
+        self.evaluate_ground_truth = rospy.get_param('~evaluate_ground_truth', True)
         self.create_plots = rospy.get_param('~create_plots', True)
         self.plot_global_traj_executed = rospy.get_param('~plot_global_traj_executed', False)
         self.show_plots = rospy.get_param('~show_plots', False)  # Auxiliary param, prob removed later
@@ -124,6 +125,8 @@ class EvalPlotting:
             x = np.divide(x, 60)
         plt.figure()
         unknown = np.array(data['UnknownVoxels'], dtype=float)
+        if self.evaluate_ground_truth:
+            unknown_gt = np.array(data['UnknownVoxelsGroundTruth'], dtype=float)
         if np.max(unknown) > 0:
             # compensate unobservable voxels
             unknown = (unknown - self.unobservable_points_pct) / (
@@ -134,6 +137,10 @@ class EvalPlotting:
             plt.ylim(0, 1)
         plt.plot(x, unknown, 'g-', label='Unknown Voxels')
         plt.xlim(left=0, right=x[-1])
+        if self.evaluate_ground_truth:
+            plt.plot(x, unknown_gt, label="Unknown Voxels Ground Truth")
+            plt.legend()
+
 
         if self.plot_global_traj_executed:
             global_traj_executed = []

@@ -240,7 +240,22 @@ namespace active_3d_planning{
             } else {
                 voxgraph_map_ptr_->updatePlanningMaps();
 
+                if (voxgraph_map_ptr_->hasActiveMapFinished()) {
+                    // Update the global point selector
+                    global_point_selector_->update();
+
+                    // Remove the oldest submap from the active submap
+                    if (voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() > 1){
+                        SubmapID oldest_active_submap_id = voxgraph_map_ptr_->getSubmapCollection().getActiveSubmapID() - 2;
+                        voxgraph_map_ptr_->getPlannerMapManager().removeSubmapFromActiveSubmap(
+                                oldest_active_submap_id);
+                    }
+                }
+
+
                 if (!voxgraph_map_ptr_->isTraversableClosePath(planned_global_trajectory_)){
+                    stopRobot();
+
                     if (global_replan_current_times_ < global_replan_max_times_) {
                         ROS_WARN("[Global Planning] Updating the map and replanning");
                         voxgraph_map_ptr_->publishActiveSubmap();
@@ -311,8 +326,6 @@ namespace active_3d_planning{
 
         void SubmapExplorationPlanner::resetLocalPlanning() {
             // Reset the state machine control variables
-            global_trajectory_planned_ = false;
-            global_point_selector_->resetGlobalPointGain();
             n_current_tree_samples_ = 0;
             current_tree_max_gain_ = 0.0;
 
@@ -433,6 +446,18 @@ namespace active_3d_planning{
                 }
             }
             return result;
+        }
+
+        void SubmapExplorationPlanner::stopRobot(){
+            EigenTrajectoryPointVector trajectory;
+
+            EigenTrajectoryPoint trajectory_point;
+            trajectory_point.position_W = current_position_;
+            trajectory_point.orientation_W_B = current_orientation_;
+
+            trajectory.push_back(trajectory_point);
+
+            requestMovement(trajectory);
         }
     }
 }

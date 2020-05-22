@@ -8,17 +8,17 @@ published_original_base_frame: "/firefly/base_link"
 odometry_noise:
   velocity:
     x:
-      mean: 0.001
-      stddev: 0.0001
+      mean: 0 #.001
+      stddev: 0 #.0001
     y:
-      mean: 0.001
-      stddev: 0.0001
+      mean: 0 #.001
+      stddev: 0 #.0001
     z:
-      mean: 0.0001
-      stddev: 0.00001
+      mean: 0 #.0001
+      stddev: 0 #.00001
     yaw:
-      mean: 0.0005
-      stddev: 0.00001
+      mean: 0 #.0005
+      stddev: 0 #.00001
   position:
     x: 
       mean: 0

@@ -82,6 +82,8 @@ namespace active_3d_planning {
             // get Free points in a square centered in the given point
             void getFreeNeighbouringPoints(const Eigen::Vector3d &point, std::vector<Eigen::Vector3d>* free_points);
 
+            std::vector<SubmapID> getSubmapsIncludingPoint(const Eigen::Vector3d& point);
+
             void updatePlanningMaps();
 
             bool hasActiveMapFinished(bool update = true);
@@ -136,7 +138,6 @@ namespace active_3d_planning {
             double search_distance_;
             double search_step_;
             double neighbourhood_distance_;
-            double global_plan_security_distance_;
             Eigen::Vector3d c_neighbor_robot_[6];
             bool tsdf_needed_;
         };
