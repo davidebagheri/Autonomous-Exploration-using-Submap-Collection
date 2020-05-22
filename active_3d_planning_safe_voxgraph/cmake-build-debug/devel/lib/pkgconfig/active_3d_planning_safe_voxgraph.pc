@@ -1,8 +1,0 @@
-prefix=/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_safe_voxgraph/cmake-build-debug/devel
-
-Name: active_3d_planning_safe_voxgraph
-Description: Description of active_3d_planning_safe_voxgraph
-Version: 0.0.0
-Cflags: -I/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_safe_voxgraph/include
-Libs: -L${prefix}/lib -lactive_3d_planning_safe_voxgraph
-Requires: active_3d_planning_voxgraph
