@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # *** Args (need to be set) ***
-n_experiments=5
-target_dir="/media/davide/DATA/data/naive_voxgraph_planner/WithDrift/Drift0_001"		# Can reuse same dir to add experiments
-clear_voxgraph_maps=true		# Irreversibly remove maps after evaluation to save disk space
+n_experiments=6
+target_dir="/home/davide/data/experiment_evaluation"		# Can reuse same dir to add experiments
+clear_maps=true		# Irreversibly remove maps after evaluation to save disk space
+evaluate_ground_truth=true #set true to evaluate on voxblox node working with ground truth odometry
+
 freq=30
 dur=30
 
@@ -20,14 +22,16 @@ for (( i=1; i<=n_experiments; i++ ))
 do  
   # run experiment
 
-  roslaunch active_3d_planning_app_submap_exploration naive_voxgraph_exploration_planner_with_drift.launch data_directory:=$target_dir record_data:=true data_frequency:=$freq time_limit:=$dur
+  roslaunch active_3d_planning_app_submap_exploration naive_voxgraph_exploration_planner_with_GT_evaluation.launch data_directory:=$target_dir record_data:=true data_frequency:=$freq time_limit:=$dur
 
   # evaluate
-   roslaunch active_3d_planning_app_submap_exploration eval_data.launch target_directory:=$target_dir method:=recent series:=false clear_voxblox_maps:=$clear_voxgraph_maps evaluate:=true
+  roslaunch active_3d_planning_app_submap_exploration eval_data.launch target_directory:=$target_dir method:=recent series:=false clear_voxblox_maps:=$clear_maps clear_voxgraph_maps:=$clear_maps evaluate:=true evaluate_ground_truth:=$evaluate_ground_truth
 	done
 
 pkill experiment4.sh
 pkill experiment4-Lin
+
+roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launch target_directory:=$target_dir	
 
 
 

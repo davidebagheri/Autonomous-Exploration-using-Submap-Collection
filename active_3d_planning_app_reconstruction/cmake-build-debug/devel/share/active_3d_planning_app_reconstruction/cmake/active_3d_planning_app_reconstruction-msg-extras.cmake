@@ -1,2 +1,0 @@
-set(active_3d_planning_app_reconstruction_MESSAGE_FILES "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_reconstruction/msg/OdometryOffset.msg")
-set(active_3d_planning_app_reconstruction_SERVICE_FILES "")

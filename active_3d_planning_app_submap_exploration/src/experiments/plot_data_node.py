@@ -16,31 +16,23 @@ from std_srvs.srv import Empty
 
 
 class EvalPlotting:
-    """
-    This is the main evaluation node. It expects the data folders and files to have the format hardcoded in the
-    eval_data_node and calls the eval_voxblox_node to execute c++ code. Pretty ugly and non-general code but just
-    needs to work in this specific case atm...
-    """
-
     def __init__(self):
         # Parse parameters
         target_dir = rospy.get_param('~target_directory')
         self.ns_voxgraph = rospy.get_param('~ns_eval_voxgraph_node', '/voxgraph_node_evaluator')
         self.evaluate = rospy.get_param('~evaluate', True)
-        self.evaluate_ground_truth = rospy.get_param('~evaluate_ground_truth', True)
         self.create_plots = rospy.get_param('~create_plots', True)
-        self.plot_global_traj_executed = rospy.get_param('~plot_global_traj_executed', False)
         self.show_plots = rospy.get_param('~show_plots', False)  # Auxiliary param, prob removed later
+        self.clear_voxgraph_maps = rospy.get_param('~clear_voxgraph_maps', False)  # rm all maps after eval (disk space!)
         self.clear_voxblox_maps = rospy.get_param('~clear_voxblox_maps', False)  # rm all maps after eval (disk space!)
         self.unobservable_points_pct = rospy.get_param('~unobservable_points_pct', 0.0)  # Exlude unobservable points
         # from the plots (in percent of total)
 
         # Setup
         self.eval_log_file = None
-        print("waiting for: " +self.ns_voxgraph + "/evaluate")
+
         rospy.wait_for_service(self.ns_voxgraph + "/evaluate")
         self.eval_voxgraph_srv = rospy.ServiceProxy(self.ns_voxgraph + "/evaluate", Empty)
-        print("service:::::::"+self.ns_voxgraph + "/evaluate")
 
         # Evaluate
         dir_expression = re.compile('\d{8}_\d{6}')  # Only check the default names
@@ -90,9 +82,12 @@ class EvalPlotting:
                 rospy.loginfo("No 'voxblox_data.csv' found, skipping dependent graphs.")
 
             # Finish
-            if self.clear_voxblox_maps:
+            if self.clear_voxgraph_maps:
                 # Remove all voxblox maps to free up disk space
                 shutil.rmtree(os.path.join(target_dir, 'voxgraph_collections'), ignore_errors=True)
+            if self.clear_voxblox_maps:
+                # Remove all voxblox maps to free up disk space
+                shutil.rmtree(os.path.join(target_dir, 'voxblox_collections'), ignore_errors=True)
             self.eval_log_file.close()
 
     
@@ -106,8 +101,6 @@ class EvalPlotting:
                 if row[0] == 'MapName':
                     headers = row
                     for header in headers:
-                        if header == 'GlobalTrajectoryExecuted' and self.plot_global_traj_executed == False:
-                            continue
                         data_voxblox[header] = []
                     continue
                 if row[0] != 'Unit':
@@ -125,8 +118,6 @@ class EvalPlotting:
             x = np.divide(x, 60)
         plt.figure()
         unknown = np.array(data['UnknownVoxels'], dtype=float)
-        if self.evaluate_ground_truth:
-            unknown_gt = np.array(data['UnknownVoxelsGroundTruth'], dtype=float)
         if np.max(unknown) > 0:
             # compensate unobservable voxels
             unknown = (unknown - self.unobservable_points_pct) / (
@@ -134,24 +125,9 @@ class EvalPlotting:
             unknown = np.maximum(unknown, np.zeros_like(unknown))
             plt.ylabel('Unknown Voxels [%]')
             plt.xlabel('Time [min]')
-            plt.ylim(0, 1)
+            plt.ylim(0, 100)
         plt.plot(x, unknown, 'g-', label='Unknown Voxels')
         plt.xlim(left=0, right=x[-1])
-        if self.evaluate_ground_truth:
-            plt.plot(x, unknown_gt, label="Unknown Voxels Ground Truth")
-            plt.legend()
-
-
-        if self.plot_global_traj_executed:
-            global_traj_executed = []
-            global_traj_executed_time = []
-            for i in range(len(data['GlobalTrajectoryExecuted'])):
-                if data['GlobalTrajectoryExecuted'][i] == 'True':
-                    global_traj_executed.append(float(data['UnknownVoxels'][i]))
-                    global_traj_executed_time.append(x[i])
-            plt.plot(global_traj_executed_time, global_traj_executed, 'o', color='red', label='Global Plan happened')
-            plt.legend()
-
 
         save_name = os.path.join(target_dir, "graphs", "ObservedVoxels.png")
         plt.savefig(save_name, dpi=300, format='png', bbox_inches='tight')

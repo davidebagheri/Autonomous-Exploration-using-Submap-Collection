@@ -1,2 +1,0 @@
-set(active_3d_planning_app_reconstruction_MESSAGE_FILES "msg/OdometryOffset.msg")
-set(active_3d_planning_app_reconstruction_SERVICE_FILES "")

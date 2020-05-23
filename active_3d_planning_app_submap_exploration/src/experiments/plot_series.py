@@ -19,16 +19,16 @@ class EvalPlotting:
 
 
         # Evaluate        
-        planners_subdirs = [os.path.join(target_dir, o) for o in os.listdir(target_dir)]
+        #planners_subdirs = [os.path.join(target_dir, o) for o in os.listdir(target_dir)]
         plt.rcParams.update({'font.size': 15})
     
         plt.figure()
-        for subdir in planners_subdirs:
-            planner_name = self.get_planner_name(os.path.split(subdir)[1])
-            self.compute_series(subdir, planner_name)
+        #for subdir in planners_subdirs:
+        #    planner_name = self.get_planner_name(os.path.split(subdir)[1])
+        #   self.compute_series(subdir)
+        self.compute_series(target_dir)
         
         save_name = os.path.join(target_dir, "SeriesOverview.png")
-        plt.legend()
         plt.savefig(save_name, dpi=300, format='png', bbox_inches='tight')
         rospy.loginfo("\n" + "*" * 53 + "\n* Evaluation completed successfully, shutting down. *\n" + "*" * 53)
         
@@ -44,7 +44,7 @@ class EvalPlotting:
         else:
             return planner_dir
         
-    def compute_series(self, target_dir, planner_name):
+    def compute_series(self, target_dir):
         rospy.loginfo("Evaluating experiment series at '%s'", target_dir)
 
         # Setup a directory for data, plots, ...
@@ -133,23 +133,10 @@ class EvalPlotting:
         
 		# Create plot
         rospy.loginfo("Creating graph 'SeriesOverview'")
-        x = means['RosTime']
+        x = np.array(means['RosTime']) / 60
+        
         unit = "s"
-        if x[-1] >= 300:
-            unit = "min"
-            x = np.divide(x, 60)
-            cpu_use = np.zeros(np.shape(means['CPUTime']))
-        cpu_std = np.zeros(np.shape(means['CPUTime']))
-        for i in range(len(means['CPUTime']) - 1):
-            div = (means['RosTime'][i + 1] - means['RosTime'][i])
-            cpu_use[i] = (means['CPUTime'][i + 1]) / div
-            cpu_std[i] = (std_devs['CPUTime'][i + 1]) / div
-        cpu_use[-1] = cpu_use[-2]
-        cpu_use = np.repeat(cpu_use, 2)
-        cpu_std[-1] = cpu_std[-2]
-        cpu_std = np.repeat(cpu_std, 2)
 
-		# Plot ends of data series for unequal lengths
         early_stops = []
         x_early = []
         for i in range(len(voxblox_data)):
@@ -164,45 +151,14 @@ class EvalPlotting:
 		# Compensate unobservable voxels
         if np.max(means['UnknownVoxels']) > 0:
             unknown = means['UnknownVoxels'] 
-            std_devs['UnknownVoxels'] = std_devs['UnknownVoxels'] * 100
-            unknown = np.maximum(unknown, np.zeros_like(unknown)) * 100
-            if (planner_name == "Normalized Frontier"):
-                plt.plot(x, unknown, '-g',label = planner_name)
-                plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
+            std_devs['UnknownVoxels'] = std_devs['UnknownVoxels']
+            unknown = np.maximum(unknown, np.zeros_like(unknown))
+
+            plt.plot(x, unknown)
+            plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
 				                    unknown + std_devs['UnknownVoxels'],
-                                    color = 'g',
 				                    alpha=.2)
-            elif (planner_name == "Biggest Frontier"):
-                plt.plot(x, unknown, color='orange',label = planner_name)
-                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-				 #                   unknown + std_devs['UnknownVoxels'],
-                  #                  color = 'orange', 
-				   #                 alpha=.2)
-            elif (planner_name == "Nearest Frontier"):
-                plt.plot(x, unknown, color='blue',label = planner_name)
-                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-				 #                   unknown + std_devs['UnknownVoxels'],
-                  #                  color = 'blue', 
-				   #                 alpha=.2)
-            elif (planner_name == "Euclidean Normalized Frontier"):
-                plt.plot(x, unknown, '-r',label = planner_name)
-                plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-				                    unknown + std_devs['UnknownVoxels'],
-                                    color = 'r', 
-				                    alpha=.2)
-            elif (planner_name == "Euclidean Nearest Frontier"):
-                plt.plot(x, unknown, '-r',label = planner_name)
-                plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-				                    unknown + std_devs['UnknownVoxels'],
-                                    color = 'r', 
-				                    alpha=.2)
-            
-            else: 
-                plt.plot(x, unknown, label = planner_name)
-                #plt.fill_between(x, unknown - std_devs['UnknownVoxels'],
-    			#	                    unknown + std_devs['UnknownVoxels'],
-    			#	                    alpha=.2)
-            plt.plot([x[i] for i in early_stops], [means['UnknownVoxelsGroundTruth'][i] for i in early_stops], 'kx',
+            plt.plot([x[i] for i in early_stops], [means['UnknownVoxels'][i] for i in early_stops], 'kx',
 				            markersize=9, markeredgewidth=2)
             plt.ylabel('Unknown Voxels [%]')
             plt.xlabel('Time [min]')

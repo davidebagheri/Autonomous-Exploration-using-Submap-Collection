@@ -21,8 +21,6 @@
 -- Marking EXECUTABLE "voxgraph_local_planner_node" of package "active_3d_planning_app_submap_exploration" for installation
 -- Marking EXECUTABLE "submap_exploration_planner_node" of package "active_3d_planning_app_submap_exploration" for installation
 -- Marking EXECUTABLE "voxgraph_node_evaluator" of package "active_3d_planning_app_submap_exploration" for installation
--- Marking EXECUTABLE "distance_run_node" of package "active_3d_planning_app_submap_exploration" for installation
--- Marking EXECUTABLE "filter_frontiers" of package "active_3d_planning_app_submap_exploration" for installation
 -- Marking HEADER FILES in "include" folder of package "active_3d_planning_app_submap_exploration" for installation
 -- Marking SHARED CONTENT FOLDER "launch" of package "active_3d_planning_app_submap_exploration" for installation
 -- Configuring done

@@ -22,7 +22,6 @@
       <config projectName="active_3d_planning_app_submap_exploration" targetName="bond_generate_messages_py" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="gmock" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="gtest_main" />
-      <config projectName="active_3d_planning_app_submap_exploration" targetName="distance_run_node" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="trajectory_msgs_generate_messages_eus" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="tf_generate_messages_cpp" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="voxblox_msgs_generate_messages_cpp" />
@@ -114,7 +113,6 @@
       <config projectName="active_3d_planning_app_submap_exploration" targetName="nav_msgs_generate_messages_py" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="roscpp_generate_messages_py" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="visualization_msgs_generate_messages_nodejs" />
-      <config projectName="active_3d_planning_app_submap_exploration" targetName="filter_frontiers" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="clean_test_results" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="sensor_msgs_generate_messages_lisp" />
       <config projectName="active_3d_planning_app_submap_exploration" targetName="dynamic_reconfigure_generate_messages_eus" />
@@ -299,20 +297,20 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.advertisement.text.has.clang-format" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../voxgraph" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/experiments" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/experiments" />
+      <recent name="$PROJECT_DIR$/cfg/planners" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/include/active_3d_planning_app_submap_exploration/module/trajectory_evaluator" />
       <recent name="$PROJECT_DIR$/include/active_3d_planning_app_submap_exploration/tools" />
       <recent name="$PROJECT_DIR$/include/active_3d_planning_app_submap_exploration/module/trajectory_generator" />
       <recent name="$PROJECT_DIR$/src/module" />
       <recent name="$PROJECT_DIR$/include/active_3d_planning_app_submap_exploration/module" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/experiments" />
-      <recent name="$PROJECT_DIR$/cfg/planners" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -448,11 +446,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="distance_run_node" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="active_3d_planning_app_submap_exploration" TARGET_NAME="distance_run_node" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="active_3d_planning_app_submap_exploration" RUN_TARGET_NAME="distance_run_node">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="download_extra_data" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="active_3d_planning_app_submap_exploration" TARGET_NAME="download_extra_data" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -489,11 +482,6 @@
       </method>
     </configuration>
     <configuration name="dynamic_reconfigure_generate_messages_py" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="active_3d_planning_app_submap_exploration" TARGET_NAME="dynamic_reconfigure_generate_messages_py" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="filter_frontiers" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="active_3d_planning_app_submap_exploration" TARGET_NAME="filter_frontiers" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="active_3d_planning_app_submap_exploration" RUN_TARGET_NAME="filter_frontiers">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1083,7 +1071,6 @@
       <item itemvalue="CMake Application.cblox_msgs_generate_messages_nodejs" />
       <item itemvalue="CMake Application.cblox_msgs_generate_messages_py" />
       <item itemvalue="CMake Application.clean_test_results" />
-      <item itemvalue="CMake Application.distance_run_node" />
       <item itemvalue="CMake Application.download_extra_data" />
       <item itemvalue="CMake Application.doxygen" />
       <item itemvalue="CMake Application.dynamic_reconfigure_gencfg" />
@@ -1092,7 +1079,6 @@
       <item itemvalue="CMake Application.dynamic_reconfigure_generate_messages_lisp" />
       <item itemvalue="CMake Application.dynamic_reconfigure_generate_messages_nodejs" />
       <item itemvalue="CMake Application.dynamic_reconfigure_generate_messages_py" />
-      <item itemvalue="CMake Application.filter_frontiers" />
       <item itemvalue="CMake Application.geometry_msgs_generate_messages_cpp" />
       <item itemvalue="CMake Application.geometry_msgs_generate_messages_eus" />
       <item itemvalue="CMake Application.geometry_msgs_generate_messages_lisp" />
@@ -1369,7 +1355,8 @@
       <workItem from="1588752249063" duration="545000" />
       <workItem from="1588752941085" duration="3155000" />
       <workItem from="1589011960306" duration="91000" />
-      <workItem from="1590133357976" duration="510000" />
+      <workItem from="1590133357976" duration="853000" />
+      <workItem from="1590142728435" duration="11367000" />
     </task>
     <servers />
   </component>

@@ -36,7 +36,7 @@ namespace active_3d_planning{
             setParam<float>(param_map, "min_gain_threshold", &min_gain_threshold_, 500);
             setParam<int>(param_map, "n_samples_threshold", &n_samples_threshold_, 100);
             setParam<int>(param_map, "n_sample_tries_threshold", &n_samples_tries_threshold_, 3000);
-            setParam<float>(param_map, "global_replan_pos_threshold", &global_replan_pos_threshold_, 1.3);
+            setParam<float>(param_map, "global_replan_pos_threshold", &global_replan_pos_threshold_, 1);
             setParam<double>(param_map, "nearest_submap_origin_max_distance", &nearest_submap_origin_max_distance_, 5.0);
             setParam<double>(param_map, "plan_time_limit", &plan_time_limit_, 4.0);
             setParam<int>(param_map, "global_replan_max_times", &global_replan_max_times_, 4);
@@ -197,7 +197,7 @@ namespace active_3d_planning{
                     return;
                 } else {
                     // Try to reach the given global point
-                    if (voxgraph_map_ptr_->isInsideAllSubmaps(voxel_position_M_d) && globalPlanToPoint(global_point_goal_O_)) {
+                    if (globalPlanToPoint(global_point_goal_O_)) {
                         ROS_INFO("[Global Planning] Going to the requested global point");
 
                         // Publish waypoints for the trajectory smoothing
@@ -257,7 +257,7 @@ namespace active_3d_planning{
                     stopRobot();
 
                     if (global_replan_current_times_ < global_replan_max_times_) {
-                        ROS_WARN("[Global Planning] Updating the map and replanning");
+                        ROS_INFO("[Global Planning] Updating the map and replanning");
                         voxgraph_map_ptr_->publishActiveSubmap();
 
                         geometry_msgs::PoseStamped global_point_planned_O_;
@@ -386,11 +386,6 @@ namespace active_3d_planning{
             if (srv.response.success) {
                 global_trajectory_planned_ = true;
                 fromVoxbloxPointToPoseStamped(goal_point_M, &global_point_planned_M_);
-                ROS_WARN("DEVO ANDARE IN: ");
-
-                std::cout << "x: " << global_point_planned_M_.pose.position.x
-                        << "y: " << global_point_planned_M_.pose.position.y
-                        << "z: " << global_point_planned_M_.pose.position.z << std::endl;
             }
             return srv.response.success;
         }
@@ -399,10 +394,6 @@ namespace active_3d_planning{
             std_srvs::Empty srv;
             if (publish_global_trajectory_cln_.call(srv)){
                 ROS_INFO("[Global Planning] Waypoints published for trajectory computation");
-
-                // Set the global trajectory start time
-                global_plan_time_ = ::ros::Time::now();
-
             }
         }
 

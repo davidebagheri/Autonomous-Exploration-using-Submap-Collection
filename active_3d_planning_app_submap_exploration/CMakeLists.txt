@@ -64,10 +64,5 @@ cs_add_executable(voxgraph_node_evaluator
         )
 target_link_libraries(voxgraph_node_evaluator ${catkin_LIBRARIES} ${PROJECT_NAME})
 
-cs_add_executable(distance_run_node
-        src/experiments/distance_run_node.cpp
-        )
-target_link_libraries(distance_run_node ${catkin_LIBRARIES} ${PROJECT_NAME})
-
 cs_install()
 cs_export()

@@ -294,7 +294,8 @@ namespace active_3d_planning {
                     while (candidate_point.z() <= z_max){
                         voxblox::Point candidate_point_M = get_T_M_O() * voxblox::Point(candidate_point.x(), candidate_point.y(), candidate_point.z());
                         Eigen::Vector3d candidate_point_d_M(candidate_point_M.x(), candidate_point_M.y(), candidate_point_M.z());
-                        if (isTraversableInAllSubmaps(candidate_point_d_M) && isInsideAllSubmaps(candidate_point_d_M)){
+                        if (isTraversableInAllSubmaps(candidate_point_d_M)){
+                            free_points->emplace_back(candidate_point_d_M);
                             marker.color.r = 1;
                             marker.color.g = 0;
                             marker.color.b = 0;

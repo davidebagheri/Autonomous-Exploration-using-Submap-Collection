@@ -69,8 +69,8 @@ namespace active_3d_planning{
             EigenTrajectoryPointVector planned_global_trajectory_;
             int global_replan_current_times_;
 
-            int n_current_tree_samples_;
-            float current_tree_max_gain_;
+            int n_current_tree_samples_;    // Current number of samples in the local planner tree
+            float current_tree_max_gain_;   // Max Gain in the local planner tree
 
             // State machine control flag
             bool global_trajectory_planned_;
@@ -78,20 +78,16 @@ namespace active_3d_planning{
             bool global_plan_happened_;     // Whether a global plan happened in a voxgraph interval
 
             // Params
-            float min_gain_threshold_;
-            int n_samples_threshold_;
-            int n_samples_tries_threshold_;
-            float global_replan_pos_threshold_;
-            double nearest_submap_origin_max_distance_;
-            int global_replan_max_times_;
-            double plan_time_limit_;
+            float min_gain_threshold_;  // Threshold under which local area is observed enough
+            int n_samples_threshold_;   // Threshold over which neighbouring area is sampled enough
+            int n_samples_tries_threshold_; // Threshold over which enough samples in neighbouring area are tried
+            float global_replan_pos_threshold_;     // Below this distance the robot is arrived to the global point
+            double nearest_submap_origin_max_distance_; // Maximum distance from nearest submap origin to frontier centroid
+            int global_replan_max_times_;   // Max number of replans to reach a global point
+            double plan_time_limit_;    // Time limit for global planning computation
 
             // Global frontier selector
             std::unique_ptr<GlobalPointSelector> global_point_selector_;
-
-            // Time
-            ::ros::Time global_plan_time_;
-            //double global_plan_time_threshold_;
 
             // Param map
             Module::ParamMap *param_map_;

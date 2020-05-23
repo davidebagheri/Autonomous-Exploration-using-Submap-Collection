@@ -21,6 +21,7 @@ Panels:
         - /Axes2
         - /Marker2
         - /PointCloud22
+        - /MarkerArray7
       Splitter Ratio: 0.5
     Tree Height: 768
   - Class: rviz/Selection
@@ -82,12 +83,12 @@ Visualization Manager:
       Queue Size: 100
       Value: false
     - Class: rviz/Axes
-      Enabled: false
+      Enabled: true
       Length: 0.4000000059604645
       Name: Axes
       Radius: 0.10000000149011612
       Reference Frame: firefly/base_link
-      Value: false
+      Value: true
     - Alpha: 0.10000000149011612
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -269,13 +270,13 @@ Visualization Manager:
       Queue Size: 100
       Value: false
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /planner/mav_local_planner/local_path
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: false
+      Value: true
     - Class: rviz/Axes
       Enabled: false
       Length: 1
@@ -303,7 +304,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -320,6 +321,20 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
+      Value: false
+    - Class: voxblox_rviz_plugin/VoxbloxMesh
+      Enabled: false
+      Name: VoxbloxMesh
+      Topic: /voxblox_node/mesh
+      Unreliable: false
+      Value: false
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /planner/planner_node/global_candidates
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -349,16 +364,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 29.40761375427246
+      Distance: 22.062265396118164
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.4022788405418396
-        Y: 1.1096043586730957
-        Z: -0.905292809009552
+        X: 0.4190926253795624
+        Y: -1.7541745901107788
+        Z: 2.5161731243133545
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -367,7 +382,7 @@ Visualization Manager:
       Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.184600830078125
+      Yaw: 1.5695977210998535
     Saved: ~
 Window Geometry:
   Displays:

@@ -247,46 +247,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node")
-    file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node"
-         RPATH "")
-  endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration" TYPE EXECUTABLE FILES "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration/distance_run_node")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node")
-    file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node"
-         OLD_RPATH "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib:/home/davide/catkin_ws/devel/lib:/opt/ros/melodic/lib:/usr/lib/x86_64-linux-gnu/hdf5/openmpi:/usr/lib/x86_64-linux-gnu/openmpi/lib:"
-         NEW_RPATH "")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/distance_run_node")
-    endif()
-  endif()
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers")
-    file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers"
-         RPATH "")
-  endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration" TYPE EXECUTABLE FILES "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib/active_3d_planning_app_submap_exploration/filter_frontiers")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers")
-    file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers"
-         OLD_RPATH "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cmake-build-debug/devel/lib:/home/davide/catkin_ws/devel/lib:/opt/ros/melodic/lib:/usr/lib/x86_64-linux-gnu/hdf5/openmpi:/usr/lib/x86_64-linux-gnu/openmpi/lib:"
-         NEW_RPATH "")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/active_3d_planning_app_submap_exploration/filter_frontiers")
-    endif()
-  endif()
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/davide/catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/include/" FILES_MATCHING REGEX "/[^/]*\\.h$" REGEX "/[^/]*\\.hpp$" REGEX "/\\.svn$" EXCLUDE)
 endif()
 
