@@ -28,3 +28,4 @@
 - git: {local-name: mavros, uri: 'git@github.com:ethz-asl/mavros.git'}
 - git: {local-name: catkin_boost_python_buildtool, uri: 'git@github.com:ethz-asl/catkin_boost_python_buildtool.git'}
 - git: {local-name: numpy_eigen, uri: 'git@github.com:ethz-asl/numpy_eigen.git'}
+
