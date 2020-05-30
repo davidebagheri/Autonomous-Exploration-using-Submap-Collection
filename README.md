@@ -60,11 +60,14 @@ During the simulation raw data get stored in the folder `my_data_dir`, passed as
 roslaunch active_3d_planning_app_submap_exploration eval_data.launch target_directory:=/path/to/my_data_dir
 ```
 This measure the amount of observed volume over time and create a plot for each simulation. 
+
+
 If multiple experiments are done, after the evaluation have been launched, it is possible to calculate average and standard deviation over all the executed experiments with:
 ```
 roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launch target_directory:=/path/to/my_data_dir
 ```
 This creates a plot in my_data_dir showing the average observed volume as a continuous line and the standard deviation as adjacent shaded area.
+
 
 ### With Drift
 To test the planners in presence of simulated drift, change the noise values in `active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` and then run:
