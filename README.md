@@ -61,6 +61,7 @@ roslaunch active_3d_planning_app_submap_exploration eval_data.launch target_dire
 ```
 This measure the amount of observed volume over time and create a plot for each simulation. 
 
+![Screenshot (164)](https://user-images.githubusercontent.com/30367721/83325509-fa6f7e80-a26c-11ea-8ce2-beb8acb69f72.png)
 
 If multiple experiments are done, after the evaluation have been launched, it is possible to calculate average and standard deviation over all the executed experiments with:
 ```
