@@ -14,9 +14,9 @@ To ensure compatibility, the following branches should be used:
 ## Table of Contents
 - [Packages](#packages)
 - [Installation](#installation)
-- [Examples](#examples)
-  - [Exploration experiments without drift](#exploration-experiments-without-drift)
-  - [Exploration experiments with drift](#exploration-experiments-with-drift)
+- [Run Experiments](#Run-Experiments)
+  - [Without Drift](#without-drift)
+  - [With Drift](#with-drift)
   
 ## Packages
 This repo is divide in three packages:
@@ -39,8 +39,8 @@ catkin build active_3d_planning_app_submap_exploration
 ```
 `active_3d_planning_voxgraph` and `active_3d_planning_naive_voxgraph` are dependencies of `active_3d_planning_app_submap_exploration`, so the aforementioned build command should be enough to compile all the packages.
 
-## Demo
-### Exploration experiments without drift
+## Run Experiments
+### Without Drift
 In order to see the planners in action, start an unreal_cv_ros game, tab out of game it (Alt+Tab for Binary, Ctrl+Shift+F1 for Editor) and then run the following command:
 ```
 roslaunch active_3d_planning_app_submap_exploration naive_voxgraph_exploration_planner_run.launch data_directory:=/path/to/my_data_dir
@@ -66,7 +66,7 @@ roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launc
 ```
 This creates a plot in my_data_dir showing the average observed volume as a continuous line and the standard deviation as adjacent shaded area.
 
-### Exploration experiments with drift
+### With Drift
 To test the planners in presence of simulated drift, change the noise values in `active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` and then run:
 ```
 roslaunch active_3d_planning_app_submap_exploration naive_voxgraph_exploration_planner_with_GT_evaluation.launch target_directory:=/path/to/my_data_dir
