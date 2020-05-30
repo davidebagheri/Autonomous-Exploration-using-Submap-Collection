@@ -69,6 +69,7 @@ roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launc
 ```
 This creates a plot in my_data_dir showing the average observed volume as a continuous line and the standard deviation as adjacent shaded area.
 
+![Screenshot (165)](https://user-images.githubusercontent.com/30367721/83325567-681baa80-a26d-11ea-892a-e49b214325c9.png)
 
 ### With Drift
 To test the planners in presence of simulated drift, change the noise values in `active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` and then run:
