@@ -7,22 +7,18 @@
 - git: {local-name: minkindr, uri: 'git@github.com:ethz-asl/minkindr.git'}
 - git: {local-name: minkindr_ros, uri: 'git@github.com:ethz-asl/minkindr_ros.git'}
 - git: {local-name: protobuf_catkin, uri: 'git@github.com:ethz-asl/protobuf_catkin.git'}
-- git: {local-name: voxblox, uri: 'git@github.com:ethz-asl/voxblox.git'}
 
 # cblox
 - git: {local-name: cblox, uri: 'git@github.com:ethz-asl/cblox.git'}
 
 # voxgraph
-- git: {local-name:maplab_msgs, uri: 'git@github.com:ethz-asl/maplab_msgs.git'}
+- git: {local-name: maplab_msgs, uri: 'git@github.com:ethz-asl/maplab_msgs.git'}
 
 # mav_voxblox_planning
 - git: {local-name: mav_comm,   uri: 'git@github.com:ethz-asl/mav_comm.git'}
 - git: {local-name: nlopt, uri: 'git@github.com:ethz-asl/nlopt.git'}
 - git: {local-name: ceres_catkin, uri: 'git@github.com:ethz-asl/ceres_catkin.git'}
 - git: {local-name: mav_trajectory_generation, uri: 'git@github.com:ethz-asl/mav_trajectory_generation.git'}
-
-# cblox skeleton planner
-- git: {local-name: cblox_planning, uri:'git@github.com:ethz-asl/asldoc-2019-ma-gasserl.git'}
 
 # drone simulation
 - git: {local-name: unreal_cv_ros, uri: 'git@github.com:ethz-asl/unreal_cv_ros.git'} 
