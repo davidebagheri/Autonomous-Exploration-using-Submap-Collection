@@ -38,7 +38,7 @@ Firstly, ROS need to be installed (see instructions [here](http://wiki.ros.org/I
 After that clone the repository in source folder and compile:
 ```
 cd ~/catkin_ws/src/
-git clone git@github.com:ethz-asl/asldoc-2019-ma-gasserl.git
+git clone git@github.com:davidebagheri/Autonomous-Exploration-using-Submap-Collection.git
 catkin build active_3d_planning_app_submap_exploration 
 ```
 `active_3d_planning_voxgraph` and `active_3d_planning_naive_voxgraph` are dependencies of `active_3d_planning_app_submap_exploration`, so the aforementioned build command should be enough to compile all the packages.
@@ -57,7 +57,7 @@ to use our planner.
 
 These launch files simulate a Firefly drone in the game, which is free to move around in the game for 30 minutes guided by the planner.
 
-The simulations that these executables run are supposed to be without sensor drift, so make sure the noise values in `catkin_ws/src/voxgraph_planner/active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` are set to zero.
+The simulations that these executables run are supposed to be without sensor drift, so make sure the noise values in `active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` are set to zero.
 
 During the simulation raw data get stored in the folder `my_data_dir`, passed as parameter. Then, it is  possible to process them with:
 ```
@@ -70,9 +70,25 @@ roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launc
 ```
 This creates a plot in my_data_dir showing the average observed volume as a continuous line and the standard deviation as adjacent shaded area.
 
-
 # Exploration experiments with drift
+To test the planners in presence of simulated drift, change the noise values in `active_3d_planning_app_submap_exploration/cfg/voxgraph/odometry_simulator.yaml` and then run:
+```
+roslaunch active_3d_planning_app_submap_exploration naive_voxgraph_exploration_planner_with_GT_evaluation.launch target_directory:=/path/to/my_data_dir
+```
+to use the Submap-based RRT* Receding-Horizon Next-Best-View, or 
+```
+roslaunch active_3d_planning_app_submap_exploration submap_exploration_planner_with_GT_evaluation.launch target_directory:=/path/to/my_data_dir
+```
+to use our planner.
 
-# Evaluation
+The difference with the no-drift launch files is that in this case an additional mapping node using ground truth odometry is executed and evaluation will happen on its reconstructed map. This is done because drift has distorting effect on the mapper, so there is no more coincidence between its map and the actual observed volume.
 
+To evaluate the stored data, now launch
+```
+roslaunch active_3d_planning_app_submap_exploration eval_data.launch target_directory:=/path/to/my_data_dir evaluate_ground_truth:=true
+```
 
+and the average performance of the overall set of experiments are still evaluated with  
+```
+roslaunch active_3d_planning_app_submap_exploration plot_experiment_series.launch target_directory:=/path/to/my_data_dir
+```
