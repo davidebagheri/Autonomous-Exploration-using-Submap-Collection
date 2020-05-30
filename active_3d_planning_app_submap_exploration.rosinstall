@@ -8,9 +8,6 @@
 - git: {local-name: minkindr_ros, uri: 'git@github.com:ethz-asl/minkindr_ros.git'}
 - git: {local-name: protobuf_catkin, uri: 'git@github.com:ethz-asl/protobuf_catkin.git'}
 
-# cblox
-- git: {local-name: cblox, uri: 'git@github.com:ethz-asl/cblox.git'}
-
 # voxgraph
 - git: {local-name: maplab_msgs, uri: 'git@github.com:ethz-asl/maplab_msgs.git'}
 
