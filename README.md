@@ -1,7 +1,7 @@
 # Autonomous-Exploration-using-Submap-Collection
 This package contains two motion planners for drones used for autonomous exploration of unknown environments, using submap-based map representation ([Voxgraph](https://github.com/ethz-asl/voxgraph))
-- Submap-based RRT* Receding-Horizon Next-Best-View: a unique RH-NBV exploration planner using the map lookup system described [here](https://www.cs.cmu.edu/~kaess/pub/Ho18iros.pdf)
-- our planner: a combination of a RH-NBV planner used as local planner and a frontier based planner used as global.
+- Submap-based RRT* Receding-Horizon Next-Best-View: a unique RRT* RH-NBV exploration planner (equal to [this](https://arxiv.org/abs/1909.09548)) using the map lookup system described [here](https://www.cs.cmu.edu/~kaess/pub/Ho18iros.pdf)
+- our planner: a combination of a RRT* RH-NBV planner used as local planner and a frontier based planner used as global, handled by a state machine.
 
 The packages is based on [mav_active_3d_planning](https://github.com/ethz-asl/mav_active_3d_planning).
 
