@@ -22,7 +22,7 @@
 - git: {local-name: mav_trajectory_generation, uri: 'git@github.com:ethz-asl/mav_trajectory_generation.git'}
 
 # cblox skeleton planner
-- git: {local-name: cblox_planners, uri:'git@github.com:ethz-asl/asldoc-2019-ma-gasserl.git'}
+- git: {local-name: cblox_planning, uri:'git@github.com:ethz-asl/asldoc-2019-ma-gasserl.git'}
 
 # drone simulation
 - git: {local-name: unreal_cv_ros, uri: 'git@github.com:ethz-asl/unreal_cv_ros.git'} 
