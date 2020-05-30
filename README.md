@@ -35,6 +35,14 @@ After that clone the repository in source folder and compile:
 ```
 cd ~/catkin_ws/src/
 git clone git@github.com:davidebagheri/Autonomous-Exploration-using-Submap-Collection.git
+wstool init . ./cblox_planning/cblox_planning_https.rosinstall
+wstool update
+
+git clone -b feature/exploration_planner git@github.com:ethz-asl/voxgraph.git
+git clone -b feature/exploration_planner git@github.com:ethz-asl/voxblox.git
+git clone -b feature/exploration_planner git@github.com:ethz-asl/cblox.git
+git clone -b feature/exploration_planner git@github.com:ethz-asl/mav_voxblox_planning.git
+
 catkin build active_3d_planning_app_submap_exploration 
 ```
 `active_3d_planning_voxgraph` and `active_3d_planning_naive_voxgraph` are dependencies of `active_3d_planning_app_submap_exploration`, so the aforementioned build command should be enough to compile all the packages.
