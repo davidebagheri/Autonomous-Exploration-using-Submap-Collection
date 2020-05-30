@@ -35,7 +35,7 @@ After that clone the repository in source folder and compile:
 ```
 cd ~/catkin_ws/src/
 git clone git@github.com:davidebagheri/Autonomous-Exploration-using-Submap-Collection.git
-wstool init . ./cblox_planning/cblox_planning_https.rosinstall
+wstool init . ./Autonomous-Exploration-using-Submap-Collection/active_3d_planning_app_submap_exploration.rosinstall
 wstool update
 
 git clone -b feature/exploration_planner git@github.com:ethz-asl/voxgraph.git
