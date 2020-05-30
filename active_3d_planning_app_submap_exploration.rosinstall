@@ -20,6 +20,9 @@
 # cblox_planning
 - git: {local-name: cblox_planning,   uri: 'git@github.com:ethz-asl/asldoc-2019-ma-gasserl.git'}
 
+# mav_active_3d_planning
+- git: {local-name: mav_active_3d_planning,   uri: 'git@github.com:ethz-asl/mav_active_3d_planning.git'}
+
 # drone simulation
 - git: {local-name: unreal_cv_ros, uri: 'git@github.com:ethz-asl/unreal_cv_ros.git'} 
 - git: {local-name: rotors_simulator, uri: 'git@github.com:ethz-asl/rotors_simulator.git'} 
